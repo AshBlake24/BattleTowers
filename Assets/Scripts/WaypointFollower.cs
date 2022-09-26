@@ -1,41 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaypointFollower : MonoBehaviour
 {
     [SerializeField] private Transform _path;
-    [SerializeField] private float _speed;
 
-    private Transform[] _waypoints;
-    private int _currentWaypoint;
+    private Waypoint[] _waypoints;
+
+    public Waypoint CurrentWaypoint { get; private set; }
+    public int CurrentWaypointIndex { get; private set; }
 
     private void Start()
     {
-        _waypoints = new Transform[_path.childCount];
+        _waypoints = _path.GetComponentsInChildren<Waypoint>();
 
-        for (int i = 0; i < _waypoints.Length; i++)
-        {
-            _waypoints[i] = _path.GetChild(i);
-        }
+        CurrentWaypointIndex = 0;
+
+        if (_waypoints.Length > 0)
+            CurrentWaypoint = _waypoints[CurrentWaypointIndex];
     }
 
     private void Update()
     {
-        Transform target = _waypoints[_currentWaypoint];
+        if (CurrentWaypoint == null)
+            return;
 
-        //Vector3 direction = (target.position - transform.position).normalized;
+        if (transform.position == CurrentWaypoint.transform.position)
+            SetNextWaypoint();
+    }
 
-        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+    public void SetNextWaypoint()
+    {
+        CurrentWaypointIndex++;
 
-        if (transform.position == target.position)
-        {
-            _currentWaypoint++;
-
-            if (_currentWaypoint >= _waypoints.Length)
-            {
-                _currentWaypoint = 0;
-            }
-        }
+        if (CurrentWaypointIndex >= _waypoints.Length)
+            CurrentWaypoint = null;
+        else
+            CurrentWaypoint = _waypoints[CurrentWaypointIndex];
     }
 }

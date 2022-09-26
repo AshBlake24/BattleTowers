@@ -1,25 +1,39 @@
 using UnityEngine;
 
+[RequireComponent(typeof(WaypointFollower))]
 public class MoveState : State
 {
     private const float RotationTime = 0.1f;
 
     [SerializeField] private float _speed;
 
-    private void Update()
-    {
-        Vector3 direction = Target.transform.position - transform.position;
+    private WaypointFollower _follower;
+    private Waypoint _targetWaypoint;
+    private float _currentVelocity;
 
-        if (direction.magnitude >= 0.01f)
-        {
-            Move();
-            Rotate(direction);
-        }
+    private void Start()
+    {
+        _follower = GetComponent<WaypointFollower>();
     }
 
-    private void Move()
+    private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, _speed * Time.deltaTime);
+        if (_follower.CurrentWaypoint == null)
+            return;
+
+        _targetWaypoint = _follower.CurrentWaypoint;
+
+        Vector3 direction = _targetWaypoint.transform.position - transform.position;
+
+        Move();
+
+        if (direction.magnitude >= 0.01f)
+            Rotate(direction);
+    }
+
+    public void Move()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, _targetWaypoint.transform.position, _speed * Time.deltaTime);
     }
 
     public void Rotate(Vector3 direction)
