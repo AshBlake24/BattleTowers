@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 3087012538511060396}
   - component: {fileID: 3087012538511060399}
   - component: {fileID: 3087012538511060398}
+  - component: {fileID: 5400855957306774817}
   - component: {fileID: 3087012538511060368}
   - component: {fileID: 3087012538511060369}
   - component: {fileID: 3087012538511060371}
@@ -204,6 +205,26 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!95 &5400855957306774817
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3087012538511060392}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46838580c1ca84b4f97560521bfa6666, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &3087012538511060368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 688a4094d8d32e64ba049f1bd4bbbabb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: 0
 --- !u!114 &3087012538511060369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +278,7 @@ MonoBehaviour:
   _transitions:
   - {fileID: 3087012538511060375}
   - {fileID: 3087012538511060378}
-  _speed: 10
+  _speed: 5
 --- !u!114 &3087012538511060375
 MonoBehaviour:
   m_ObjectHideFlags: 0

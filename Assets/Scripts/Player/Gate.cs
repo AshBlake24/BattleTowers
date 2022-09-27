@@ -7,7 +7,7 @@ public class Gate : MonoBehaviour
 
     private int _currentHealth;
 
-    public event Action<int, int> HealthChanged;
+    public event Action<int> HealthChanged;
     public event Action Destroyed;
 
     public bool IsDestroyed { get; private set; }
@@ -16,6 +16,8 @@ public class Gate : MonoBehaviour
     {
         _currentHealth = _health;
         IsDestroyed = false;
+
+        HealthChanged?.Invoke(_currentHealth);
     }
 
     public void TakeDamage(int damage)
@@ -28,6 +30,6 @@ public class Gate : MonoBehaviour
             Destroyed?.Invoke();
         }
 
-        HealthChanged?.Invoke(_currentHealth, _health);
+        HealthChanged?.Invoke(_currentHealth);
     }
 }
