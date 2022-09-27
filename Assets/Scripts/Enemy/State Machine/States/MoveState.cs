@@ -8,7 +8,8 @@ public class MoveState : State
     [SerializeField] private float _speed;
 
     private WaypointFollower _follower;
-    private Waypoint _targetWaypoint;
+    private Transform _target;
+    private Vector3 _direction;
     private float _currentVelocity;
 
     private void Start()
@@ -18,27 +19,27 @@ public class MoveState : State
 
     private void Update()
     {
-        if (_follower.CurrentWaypoint == null)
-            return;
+        if (_follower.CurrentWaypoint != null)
+            _target = _follower.CurrentWaypoint.transform;
+        else
+            _target = Target.transform;
 
-        _targetWaypoint = _follower.CurrentWaypoint;
-
-        Vector3 direction = _targetWaypoint.transform.position - transform.position;
+        _direction = _target.position - transform.position;
 
         Move();
 
-        if (direction.magnitude >= 0.01f)
-            Rotate(direction);
+        if (_direction.magnitude >= 0.01f)
+            Rotate();
     }
 
     public void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _targetWaypoint.transform.position, _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
     }
 
-    public void Rotate(Vector3 direction)
+    public void Rotate()
     {
-        Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
+        Quaternion lookRotation = Quaternion.LookRotation(_direction, Vector3.up);
 
         float zAxisRotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, lookRotation.eulerAngles.y, ref _currentVelocity, RotationTime);
 

@@ -4,9 +4,9 @@ public abstract class State : MonoBehaviour
 {
     [SerializeField] private Transition[] _transitions;
 
-    protected GameObject Target { get; set; }
+    protected Gate Target { get; set; }
 
-    public void Enter(GameObject target)
+    public void Enter(Gate target)
     {
         if (enabled == false)
         {
@@ -39,7 +39,7 @@ public abstract class State : MonoBehaviour
         {
             foreach (var transition in _transitions)
             {
-                if (transition.NeedTransition)
+                if (transition.ReadyToTransition)
                     return transition.TargetState;
             }
         }

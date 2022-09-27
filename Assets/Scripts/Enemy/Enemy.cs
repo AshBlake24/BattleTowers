@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private GameObject _target;
+    [SerializeField] private Gate _target;
 
-    public GameObject Target => _target;
+    public Gate Target => _target;
 }

@@ -6,7 +6,7 @@ public class EnemyStateMachine : MonoBehaviour
     [SerializeField] private State _startState;
 
     private State _currentState;
-    private GameObject _target;
+    private Gate _target;
 
     private void Start()
     {
