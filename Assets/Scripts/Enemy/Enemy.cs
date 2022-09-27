@@ -8,9 +8,11 @@ public class Enemy : MonoBehaviour
     public event Action<Enemy> Died;
 
     public Gate Target { get; private set; }
+    public bool IsAlive { get; private set; }
 
     public void Init(Gate target)
     {
+        IsAlive = true;
         Target = target;
     }
 
@@ -20,8 +22,8 @@ public class Enemy : MonoBehaviour
 
         if (_health <= 0)
         {
+            IsAlive = false;
             Died?.Invoke(this);
-            Destroy(gameObject);
         }
     }
 }
