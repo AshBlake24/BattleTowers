@@ -1,8 +1,14 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Gate _target;
+    public event Action<Enemy> Died;
 
-    public Gate Target => _target;
+    public Gate Target { get; private set; }
+
+    public void Init(Gate target)
+    {
+        Target = target;
+    }
 }
