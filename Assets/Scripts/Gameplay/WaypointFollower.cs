@@ -1,17 +1,18 @@
+using System.IO;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class WaypointFollower : MonoBehaviour
 {
-    [SerializeField] private Transform _path;
-
     private Waypoint[] _waypoints;
 
     public Waypoint CurrentWaypoint { get; private set; }
     public int CurrentWaypointIndex { get; private set; }
+    protected Transform Path { get; private set; }
 
     private void Start()
     {
-        _waypoints = _path.GetComponentsInChildren<Waypoint>();
+        _waypoints = Path.GetComponentsInChildren<Waypoint>();
 
         CurrentWaypointIndex = 0;
 
@@ -26,6 +27,11 @@ public class WaypointFollower : MonoBehaviour
 
         if (transform.position == CurrentWaypoint.transform.position)
             SetNextWaypoint();
+    }
+
+    public void Init(Transform path)
+    {
+        Path = path;
     }
 
     public void SetNextWaypoint()

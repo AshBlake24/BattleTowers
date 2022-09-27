@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private Wave[] _waves;
     [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private Transform _path;
     [SerializeField] private Gate _target;
 
     public event Action<int, int> EnemyKilled;
@@ -16,6 +17,8 @@ public class Spawner : MonoBehaviour
     private int _spawnedEnemies;
     private int _killedEnemies;
     private int _maxEnemiesInCurrentWave;
+    private Coroutine _spawnEnemies;
+
 
     private void Start()
     {
@@ -27,7 +30,11 @@ public class Spawner : MonoBehaviour
     {
         if (_target.IsDestroyed)
         {
-            StopCoroutine(SpawnEnemies());
+            if (_spawnEnemies != null)
+            {
+                StopCoroutine(_spawnEnemies);
+                _spawnEnemies = null;
+            }                
         }
 
         if (_killedEnemies >= _maxEnemiesInCurrentWave)
@@ -54,7 +61,7 @@ public class Spawner : MonoBehaviour
 
         EnemyKilled?.Invoke(_killedEnemies, _maxEnemiesInCurrentWave);
 
-        StartCoroutine(SpawnEnemies());
+        _spawnEnemies = StartCoroutine(SpawnEnemies());
     }
 
     private void ResetWave()
@@ -68,6 +75,9 @@ public class Spawner : MonoBehaviour
         Enemy enemy = Instantiate(GetRandomEnemy(), _spawnPoint);
 
         enemy.Init(_target);
+
+        if (enemy.TryGetComponent(out WaypointFollower follower))
+            follower.Init(_path);
 
         enemy.Died += OnEnemyDied;
     }
