@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitions: []
+  DelayBeforeDestroy: 3
 --- !u!1 &7334845298356451279
 GameObject:
   m_ObjectHideFlags: 0

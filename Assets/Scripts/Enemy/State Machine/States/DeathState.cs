@@ -1,15 +1,13 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class DeathState : State
 {
     private const string Died = "Died";
-    private const int DelayBeforeDestroy = 3;
+
+    [SerializeField] private int DelayBeforeDestroy;
 
     private Animator _animator;
-
-    private static WaitForSeconds _delay = new WaitForSeconds(DelayBeforeDestroy);
 
     private void Awake()
     {
@@ -20,13 +18,6 @@ public class DeathState : State
     {
         _animator.SetTrigger(Died);
 
-        StartCoroutine(DestroyDelay());
-    }
-
-    private IEnumerator DestroyDelay()
-    {
-        yield return _delay;
-
-        Destroy(gameObject);
+        Destroy(gameObject, DelayBeforeDestroy);
     }
 }
