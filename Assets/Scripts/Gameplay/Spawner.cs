@@ -100,15 +100,13 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
-        var spawnRate = new WaitForSeconds(_currentWave.SpawnRate);
-
         while (_spawnedEnemies < _currentWave.EnemiesCount)
         {
             InstantiateEnemy();
 
             _spawnedEnemies++;
 
-            yield return spawnRate;
+            yield return Helpers.GetTime(_currentWave.SpawnRate);
         }
 
         ResetWave();
