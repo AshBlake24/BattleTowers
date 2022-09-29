@@ -26,16 +26,6 @@ public class TowerPlaceholder : MonoBehaviour
         }
     }
 
-    private void OnMouseEnter()
-    {
-        _renderer.material.color = _hoverColor;
-    }
-
-    private void OnMouseExit()
-    {
-        _renderer.material.color = _originColor;
-    }
-
     private void TryOpenTowerSelectorUI(Ray ray)
     {
         RaycastHit hit;
@@ -47,15 +37,32 @@ public class TowerPlaceholder : MonoBehaviour
                 _selector.transform.position = Input.mousePosition;
 
                 if (_selector.gameObject.activeSelf)
-                    _selector.OpenUI();
+                    _selector.OpenUI(this);
                 else
+                {
                     _selector.gameObject.SetActive(true);
+                    _selector.OpenUI(this);
+                }
 
             }
             else if (_selector.gameObject.activeSelf)
             {
-                _selector.gameObject.SetActive(false);
+                _selector.CloseUI();
             }
         }
+        else if (_selector.gameObject.activeSelf)
+        {
+            _selector.CloseUI();
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        _renderer.material.color = _hoverColor;
+    }
+
+    private void OnMouseExit()
+    {
+        _renderer.material.color = _originColor;
     }
 }
