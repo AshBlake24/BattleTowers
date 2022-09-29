@@ -10,3 +10,10 @@ public abstract class Tower : MonoBehaviour
 
     public float Price => _price;
 }
+
+public enum TowerType
+{
+    Archery,
+    Fire,
+    Ice
+}
