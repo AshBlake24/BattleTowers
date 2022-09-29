@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class TowerBuilder : MonoBehaviour
 {
-    [SerializeField] private TowerSelector _selector;
+    [SerializeField] private GameObject _selectionMenu;
 
     private TowerViewer[] _viewers;
 
-    private void Awake() => _viewers = _selector.GetComponentsInChildren<TowerViewer>();
+    private void Awake() => _viewers = _selectionMenu.GetComponentsInChildren<TowerViewer>();
 
     private void OnEnable() 
     { 

@@ -18,18 +18,9 @@ public class TowerViewer : MonoBehaviour
 
     private void OnDisable() => _button.onClick.RemoveListener(OnButtonClick);
 
-    public void Init(TowerPlaceholder placeholder)
-    {
-        _towerPlaceholder = placeholder;
-    }
+    public void Init(TowerPlaceholder placeholder) => _towerPlaceholder = placeholder;
 
-    public void Clear()
-    {
-        _towerPlaceholder = null;
-    }
+    public void Clear() => _towerPlaceholder = null;
 
-    private void OnButtonClick()
-    {
-        ViewerClicked?.Invoke(_tower, _towerPlaceholder);
-    }
+    private void OnButtonClick() => ViewerClicked?.Invoke(_tower, _towerPlaceholder);
 }
