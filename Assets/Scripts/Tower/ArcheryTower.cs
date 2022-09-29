@@ -5,15 +5,14 @@ public class ArcheryTower : Tower
     private const string CheckTargetsMethod = "CheckTargets";
     private const float UpdateTargetsPerFrame = 2;
 
-    [SerializeField] private Projectile _projectile;
+    [SerializeField] private Arrow _projectile;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _fireRange;
 
     private Enemy _target;
     private int _enemiesLayerMask;
     
-
-    private void Start()
+    private void OnEnable()
     {
         _enemiesLayerMask = 1 << EnemiesLayerMask;
         InvokeRepeating(CheckTargetsMethod, 0, 1 / UpdateTargetsPerFrame);

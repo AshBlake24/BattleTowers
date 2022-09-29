@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Arrow : Projectile
 {
-    [SerializeField] private int _damage;
-    [SerializeField] private int _speed;
-
     private Enemy _target;
 
     private void Update()
@@ -17,7 +14,11 @@ public class Projectile : MonoBehaviour
 
         Vector3 direction = (_target.transform.position - transform.position).normalized;
 
-        transform.Translate(direction * _speed * Time.deltaTime, Space.World);
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+        transform.rotation = Quaternion.Euler(lookRotation.eulerAngles);
+
+        transform.Translate(direction * Speed * Time.deltaTime, Space.World);
     }
 
     public void Init(Enemy target)
@@ -29,7 +30,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(_damage);
+            enemy.TakeDamage(Damage);
         }
 
         Destroy(gameObject);

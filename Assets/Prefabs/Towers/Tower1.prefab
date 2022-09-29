@@ -50,7 +50,7 @@ MonoBehaviour:
   FiringRate: 1
   EnemiesLayerMask: 8
   _price: 0
-  _projectile: {fileID: -7534694956085564373, guid: 3b43c325cf98afb4b8485b471612c68b, type: 3}
+  _projectile: {fileID: 7780707097300720587, guid: af13b9bf6c70f8349bf1876b7b91004c, type: 3}
   _firePoint: {fileID: 4953877198886037307}
   _fireRange: 5
 --- !u!1 &6646421721009782545
