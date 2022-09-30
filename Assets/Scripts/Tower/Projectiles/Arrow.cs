@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class Arrow : Projectile
+public class Arrow : MonoBehaviour
 {
+    [SerializeField] private int _damage;
+    [SerializeField] private int _speed;
+
     private Enemy _target;
 
     private void Update()
@@ -18,7 +21,7 @@ public class Arrow : Projectile
 
         transform.rotation = Quaternion.Euler(lookRotation.eulerAngles);
 
-        transform.Translate(direction * Speed * Time.deltaTime, Space.World);
+        transform.Translate(direction * _speed * Time.deltaTime, Space.World);
     }
 
     public void Init(Enemy target)
@@ -30,7 +33,7 @@ public class Arrow : Projectile
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(Damage);
+            enemy.TakeDamage(_damage);
         }
 
         Destroy(gameObject);

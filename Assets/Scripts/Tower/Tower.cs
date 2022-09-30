@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Tower : MonoBehaviour
 {
     [SerializeField] protected float FiringRate;
-    [SerializeField] protected int EnemiesLayerMask;
+    [SerializeField] protected float FireRange;
     [SerializeField] private int _price;
 
     protected float LastShootTime;

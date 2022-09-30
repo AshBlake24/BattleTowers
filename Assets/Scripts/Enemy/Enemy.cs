@@ -10,9 +10,13 @@ public class Enemy : MonoBehaviour
     public Gate Target { get; private set; }
     public bool IsAlive { get; private set; }
 
-    public void Init(Gate target)
+    private void OnEnable()
     {
         IsAlive = true;
+    }
+
+    public void Init(Gate target)
+    {
         Target = target;
     }
 

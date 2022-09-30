@@ -5,14 +5,26 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class TowerViewer : MonoBehaviour
 {
-    [SerializeField] private Tower _tower;
+    [Header("Tower Settings")]
+    [SerializeField] private Tower _towerPrefab;
+    [SerializeField] private Sprite _towerIcon;
+
+    [Header("Viewer Settings")]
+    [SerializeField] private Image _icon;
+    [SerializeField] private Image _frame;
 
     public event Action<Tower, TowerPlaceholder> ViewerClicked;
 
+    
     private Button _button;
     private TowerPlaceholder _towerPlaceholder;
 
-    private void Awake() => _button = GetComponent<Button>();
+    private void Awake()
+    {
+        _button = GetComponent<Button>();
+
+        _icon.sprite = _towerIcon;
+    }
 
     private void OnEnable() => _button.onClick.AddListener(OnButtonClick);
 
@@ -22,5 +34,5 @@ public class TowerViewer : MonoBehaviour
 
     public void Clear() => _towerPlaceholder = null;
 
-    private void OnButtonClick() => ViewerClicked?.Invoke(_tower, _towerPlaceholder);
+    private void OnButtonClick() => ViewerClicked?.Invoke(_towerPrefab, _towerPlaceholder);
 }

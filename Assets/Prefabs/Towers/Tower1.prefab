@@ -48,11 +48,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FiringRate: 1
-  EnemiesLayerMask: 8
+  FireRange: 6
   _price: 0
-  _projectile: {fileID: 7780707097300720587, guid: af13b9bf6c70f8349bf1876b7b91004c, type: 3}
-  _firePoint: {fileID: 4953877198886037307}
-  _fireRange: 5
+  Arrow: {fileID: 7780707097300720587, guid: af13b9bf6c70f8349bf1876b7b91004c, type: 3}
+  FirePoint: {fileID: 4953877198886037307}
+  EnemiesLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  MASK: 8
 --- !u!1 &6646421721009782545
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +98,7 @@ GameObject:
   - component: {fileID: 6393898713468639806}
   - component: {fileID: 6090588008570239643}
   - component: {fileID: 4729818270003671880}
-  - component: {fileID: 5708015196268317451}
+  - component: {fileID: 3299922194033952781}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -168,7 +171,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5708015196268317451
+--- !u!65 &3299922194033952781
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,7 +195,7 @@ GameObject:
   - component: {fileID: 7561049782724649522}
   - component: {fileID: 7101684237655323769}
   - component: {fileID: 967477621514244392}
-  - component: {fileID: 5107174435992235214}
+  - component: {fileID: 1027947576900795587}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -265,7 +268,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5107174435992235214
+--- !u!65 &1027947576900795587
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
