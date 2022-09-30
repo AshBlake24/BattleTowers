@@ -4,6 +4,7 @@ public class Arrow : MonoBehaviour
 {
     [SerializeField] private int _damage;
     [SerializeField] private int _speed;
+    [SerializeField] private ParticleSystem _impactEffect;
 
     private Enemy _target;
 
@@ -33,6 +34,7 @@ public class Arrow : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
+            Instantiate(_impactEffect, transform.position, transform.rotation);
             enemy.TakeDamage(_damage);
         }
 

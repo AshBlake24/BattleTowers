@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Cannonball : MonoBehaviour
 {
-
+    [SerializeField] private ParticleSystem _explosionEffect;
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ArcheryTower : AttackTower
 {
+    [SerializeField] private Arrow _arrow;
+
     private void OnEnable()
     {
         InvokeRepeating(CheckTargetsMethod, 0, 1 / UpdateTargetsPerFrame);
@@ -14,7 +16,7 @@ public class ArcheryTower : AttackTower
 
         if (LastShootTime >= FiringRate)
         {
-            Fire();
+            Shot();
 
             LastShootTime = 0;
         }
@@ -22,9 +24,9 @@ public class ArcheryTower : AttackTower
         LastShootTime += Time.deltaTime;
     }
 
-    protected override void Fire()
+    protected override void Shot()
     {
-        var projectile = Instantiate(Arrow, FirePoint.position, FirePoint.rotation, transform);
-        projectile.Init(Target);
+        Arrow arrow = Instantiate(_arrow, FirePoint.position, FirePoint.rotation, transform);
+        arrow.Init(Target);
     }
 }
