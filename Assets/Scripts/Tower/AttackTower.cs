@@ -5,9 +5,9 @@ public abstract class AttackTower : Tower
 {
     protected const string CheckTargetsMethod = "CheckTargets";
     protected const float UpdateTargetsPerFrame = 2;
-    
-    [SerializeField] protected Transform FirePoint;
+
     [SerializeField] protected LayerMask EnemiesLayerMask;
+    [SerializeField] protected Transform FirePoint;
 
     protected Enemy Target;
 

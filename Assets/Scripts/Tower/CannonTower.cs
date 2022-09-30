@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CannonTower : AttackTower
@@ -9,6 +7,10 @@ public class CannonTower : AttackTower
     [SerializeField] private Transform _cannon;
     [SerializeField] private Cannonball _cannonball;
     [SerializeField] private float _angleInDegrees;
+    [SerializeField] private float _rotationSpeed = 750;
+
+    private Vector3 _directionToTarget;
+    private Vector3 _directionInAxisXZ;
 
     private void OnEnable() 
     {
@@ -20,6 +22,10 @@ public class CannonTower : AttackTower
     {
         if (Target == null || Target.IsAlive == false)
             return;
+
+        FindDirectionsToTarget();
+
+        RotateToTarget();
 
         if (LastShootTime >= FiringRate)
         {
@@ -33,21 +39,35 @@ public class CannonTower : AttackTower
 
     protected override void Shot()
     {
-        Vector3 direction = Target.transform.position - FirePoint.position;
-        Vector3 directionXZ = new Vector3(direction.x, 0f, direction.z);
-
-        _cannon.rotation = Quaternion.LookRotation(directionXZ, Vector3.up);
-
-        float x = directionXZ.magnitude;
-        float y = direction.y;
-
-        float angleInRadians = _angleInDegrees * Mathf.Deg2Rad;
-
-        float speedSquared = (g * x * x) / (2 * (y - Mathf.Tan(angleInRadians) * x) * Mathf.Pow(Mathf.Cos(angleInRadians), 2));
-        float speed = Mathf.Sqrt(Mathf.Abs(speedSquared));
+        float speed = GetInitialSpeed();
 
         Cannonball cannonball = Instantiate(_cannonball, FirePoint.position, Quaternion.identity);
 
         cannonball.GetComponent<Rigidbody>().velocity = FirePoint.forward * speed;
+    }
+
+    private void FindDirectionsToTarget()
+    {
+        _directionToTarget = Target.transform.position - FirePoint.position;
+        _directionInAxisXZ = new Vector3(_directionToTarget.x, 0f, _directionToTarget.z);
+    }
+
+    private void RotateToTarget()
+    {
+        Quaternion lookRotation = Quaternion.LookRotation(_directionInAxisXZ, Vector3.up);
+
+        _cannon.rotation = Quaternion.RotateTowards(_cannon.rotation, lookRotation, _rotationSpeed * Time.deltaTime);
+    }
+
+    private float GetInitialSpeed()
+    {
+        float x = _directionInAxisXZ.magnitude;
+        float y = _directionToTarget.y;
+
+        float angleInRadians = _angleInDegrees * Mathf.Deg2Rad;
+
+        float speedSquared = (g * x * x) / (2 * (y - Mathf.Tan(angleInRadians) * x) * Mathf.Pow(Mathf.Cos(angleInRadians), 2));
+
+        return Mathf.Sqrt(Mathf.Abs(speedSquared));
     }
 }
