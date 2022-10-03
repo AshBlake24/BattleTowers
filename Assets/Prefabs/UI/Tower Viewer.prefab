@@ -249,10 +249,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerPrefab: {fileID: 0}
-  _towerIcon: {fileID: 0}
-  _frameColor: {r: 0, g: 0, b: 0, a: 0}
+  _towerActiveIcon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  _towerInactiveIcon: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   _icon: {fileID: 5087013643529668569}
   _frame: {fileID: 4277863211505629731}
+  _activeFrameColor: {r: 1, g: 1, b: 1, a: 1}
+  _inactiveFrameColor: {r: 0.24705882, g: 0.09411765, b: 0.09411765, a: 1}
 --- !u!1 &8803398207928111232
 GameObject:
   m_ObjectHideFlags: 0

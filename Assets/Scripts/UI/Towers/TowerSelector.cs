@@ -8,6 +8,7 @@ public class TowerSelector : MonoBehaviour
     private const float OpenSize = 1;
     private const float CloseSize = 0;
 
+    [SerializeField] private Player _player;
     [SerializeField] private GameObject _selectionMenu;
     [SerializeField] private List<TowerViewer> _towerViewers;
     [SerializeField] private float _openDuration;
@@ -37,8 +38,11 @@ public class TowerSelector : MonoBehaviour
 
     public void OpenUI(TowerPlaceholder placeholder)
     {
+        if (_selectionMenu.activeSelf == false)
+            _selectionMenu.SetActive(true);
+
         foreach (var viewer in _towerViewers)
-            viewer.Init(placeholder);
+            viewer.Init(placeholder, _player.Money);
 
         _selectionMenu.transform.DOScale(OpenSize, _openDuration).From(Vector3.zero)
                       .SetEase(Ease.OutBounce);
@@ -46,6 +50,9 @@ public class TowerSelector : MonoBehaviour
 
     public void CloseUI()
     {
+        if (_selectionMenu.activeSelf == false)
+            return;
+
         foreach (var viewer in _towerViewers)
             viewer.Clear();
 
@@ -65,23 +72,14 @@ public class TowerSelector : MonoBehaviour
             {
                 _selectionMenu.transform.position = Input.mousePosition;
 
-                if (_selectionMenu.activeSelf)
-                {
-                    OpenUI(placeholder);
-                }
-                else
-                {
-                    _selectionMenu.SetActive(true);
-                    OpenUI(placeholder);
-                }
-
+                OpenUI(placeholder);
             }
-            else if (_selectionMenu.activeSelf)
+            else
             {
                 CloseUI();
             }
         }
-        else if (_selectionMenu.activeSelf)
+        else
         {
             CloseUI();
         }
