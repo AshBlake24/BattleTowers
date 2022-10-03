@@ -17,6 +17,8 @@ public abstract class Tower : MonoBehaviour
 
     public int Price => _price;
 
+    private void OnEnable() => LastShootTime = FiringRate;
+
     protected abstract void Shot();
 
     protected abstract void CheckTargets();

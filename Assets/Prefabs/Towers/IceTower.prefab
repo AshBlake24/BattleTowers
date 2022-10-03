@@ -215,7 +215,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   FirePoint: {fileID: 5998435965959747202}
-  FiringRate: 2
+  FiringRate: 3
   FireRange: 5
   _iceRingEffect: {fileID: 9150993735360083344, guid: 4f9fdbe8368b6394495025445d2b92d7, type: 3}
-  _freezingTime: 1
+  _freezingTime: 2

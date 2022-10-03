@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
+    [SerializeField] private ParticleSystem _freezeEffect;
 
     private bool _isFreezing;
     private Coroutine _freezingCooldown;
@@ -54,8 +55,12 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator FreezingCooldown(float freezingTime)
     {
+        var freezeEffect = Instantiate(_freezeEffect, transform.position, transform.rotation);
+
         yield return Helpers.GetTime(freezingTime);
 
         _isFreezing = false;
+
+        Destroy(freezeEffect);
     }
 }
