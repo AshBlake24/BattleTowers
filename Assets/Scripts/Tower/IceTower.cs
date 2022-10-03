@@ -2,35 +2,46 @@ using UnityEngine;
 
 public class IceTower : Tower
 {
+    [Header("Ice Tower Settings")]
     [SerializeField] private ParticleSystem _iceRingEffect;
     [SerializeField] private float _freezingTime;
 
+    private Collider[] _colliders;
+
+    private void OnEnable()
+    {
+        InvokeRepeating(CheckTargetsMethod, 0, 1 / UpdateTargetsPerFrame);
+    }
+
     private void Update()
     {
+        LastShootTime += Time.deltaTime;
+
+        if (_colliders.Length <= 0)
+            return;
+
         if (LastShootTime >= FiringRate)
         {
             Shot();
 
             LastShootTime = 0;
         }
-
-        LastShootTime += Time.deltaTime;
     }
 
-    private void Shot()
+    protected override void CheckTargets()
+    {
+        _colliders = Physics.OverlapSphere(FirePoint.position, FireRange, EnemiesLayerMask);
+    }
+
+    protected override void Shot()
     {
         Instantiate(_iceRingEffect, FirePoint.position, Quaternion.identity);
 
-        Collider[] colliders = Physics.OverlapSphere(FirePoint.position, FireRange, EnemiesLayerMask);
-
-        if (colliders.Length > 0)
+        foreach (var collider in _colliders)
         {
-            foreach (var collider in colliders)
+            if (collider.gameObject.TryGetComponent(out Enemy enemy))
             {
-                if (collider.gameObject.TryGetComponent(out Enemy enemy))
-                {
-                    enemy.Freeze(_freezingTime);
-                }
+                enemy.Freeze(_freezingTime);
             }
         }
     }

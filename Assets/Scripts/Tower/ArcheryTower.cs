@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ArcheryTower : AttackTower
 {
+    [Header("Archery Tower Settings")]
     [SerializeField] private Arrow _arrow;
 
     private void OnEnable()
@@ -11,6 +12,8 @@ public class ArcheryTower : AttackTower
 
     private void Update()
     {
+        LastShootTime += Time.deltaTime;
+
         if (Target == null || Target.IsAlive == false)
             return;
 
@@ -20,8 +23,6 @@ public class ArcheryTower : AttackTower
 
             LastShootTime = 0;
         }
-
-        LastShootTime += Time.deltaTime;
     }
 
     protected override void Shot()

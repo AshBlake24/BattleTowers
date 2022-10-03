@@ -2,6 +2,9 @@ using UnityEngine;
 
 public abstract class Tower : MonoBehaviour
 {
+    protected const string CheckTargetsMethod = "CheckTargets";
+    protected const float UpdateTargetsPerFrame = 2;
+
     [SerializeField] private int _price;
 
     [Header("Tower Settings")]
@@ -13,6 +16,10 @@ public abstract class Tower : MonoBehaviour
     protected float LastShootTime;
 
     public int Price => _price;
+
+    protected abstract void Shot();
+
+    protected abstract void CheckTargets();
 
     private void OnDrawGizmosSelected()
     {

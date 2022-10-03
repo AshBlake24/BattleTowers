@@ -4,7 +4,7 @@ public class CannonTower : AttackTower
 {
     private readonly float Gravity = Physics.gravity.y;
 
-    [Header("Cannon Settings")]
+    [Header("Cannon Tower Settings")]
     [SerializeField] private Transform _cannon;
     [SerializeField] private float _angleInDegrees;
     [SerializeField] private float _rotationSpeed = 750;
@@ -21,6 +21,8 @@ public class CannonTower : AttackTower
 
     private void Update()
     {
+        LastShootTime += Time.deltaTime;
+
         if (Target == null || Target.IsAlive == false)
             return;
 
@@ -34,8 +36,6 @@ public class CannonTower : AttackTower
 
             LastShootTime = 0;
         }
-
-        LastShootTime += Time.deltaTime;
     }
 
     protected override void Shot()

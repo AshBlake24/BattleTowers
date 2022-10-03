@@ -1,16 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public abstract class AttackTower : Tower
 {
-    protected const string CheckTargetsMethod = "CheckTargets";
-    protected const float UpdateTargetsPerFrame = 2;    
-
     protected Enemy Target;
 
-    protected abstract void Shot();
-
-    protected void CheckTargets()
+    protected override void CheckTargets()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, FireRange, EnemiesLayerMask);
 
