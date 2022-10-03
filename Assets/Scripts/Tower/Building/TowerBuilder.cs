@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TowerBuilder : MonoBehaviour
 {
+    [SerializeField] private Player _player;
     [SerializeField] private GameObject _selectionMenu;
 
     private TowerViewer[] _viewers;
@@ -28,7 +29,10 @@ public class TowerBuilder : MonoBehaviour
 
     private void OnViewerClicked(Tower tower, TowerPlaceholder placeholder)
     {
-        //реалиовать покупку за очки
+        if (_player.Money < tower.Price)
+            return;
+
+        _player.Buy(tower.Price);
 
         Transform towerPlace = placeholder.transform.parent;
 

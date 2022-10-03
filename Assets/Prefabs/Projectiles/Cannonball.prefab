@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4578897255179698535}
   - component: {fileID: 8553979655311355953}
   - component: {fileID: 1242476143883695681}
-  - component: {fileID: 5315841361308701955}
   - component: {fileID: 1633856824817260954}
+  - component: {fileID: 5315841361308701955}
   m_Layer: 0
   m_Name: Cannonball
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5705880523180151543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.085, y: 0.085, z: 0.085}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3a3357bce4838294f996f2cc55f824e0, type: 2}
+  - {fileID: 2100000, guid: c8f1f59e5a9487f4f81f388eeb78fe63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,23 +94,11 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5705880523180151543}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5315841361308701955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5705880523180151543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c7b82e86b9cac3478e7dfea865dd3ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &1633856824817260954
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -127,3 +115,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5315841361308701955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705880523180151543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7b82e86b9cac3478e7dfea865dd3ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _explosionRadius: 1.5
+  _explosionEffect: {fileID: 7414552305357398425, guid: a84a6db6fb8e71e45b034ada9ebb0cec, type: 3}

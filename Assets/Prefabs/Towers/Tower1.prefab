@@ -47,13 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0a9d7474b829e4584ddbdb6c7a7bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _price: 150
   FiringRate: 1
   FireRange: 6
-  _price: 0
-  FirePoint: {fileID: 4953877198886037307}
   EnemiesLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  FirePoint: {fileID: 4953877198886037307}
   _arrow: {fileID: 7780707097300720587, guid: af13b9bf6c70f8349bf1876b7b91004c, type: 3}
 --- !u!1 &6646421721009782545
 GameObject:

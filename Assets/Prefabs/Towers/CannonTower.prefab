@@ -506,10 +506,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7056121279311362716}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3194306, y: 0.00000023841858, z: 1.3931341}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4448299165767747645}
   - {fileID: 5646772820445974539}
@@ -528,13 +528,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8693e6797a5cba34891d08c3b50e482c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _price: 200
   FiringRate: 1
   FireRange: 6
-  _price: 0
   EnemiesLayerMask:
     serializedVersion: 2
     m_Bits: 256
   FirePoint: {fileID: 2793863964250491141}
   _cannon: {fileID: 4448299165767747645}
-  _cannonball: {fileID: 5315841361308701955, guid: a6c6af7917485f546acfc1b6d1104d7e, type: 3}
   _angleInDegrees: 20
+  _rotationSpeed: 750
+  _cannonball: {fileID: 5315841361308701955, guid: a6c6af7917485f546acfc1b6d1104d7e, type: 3}

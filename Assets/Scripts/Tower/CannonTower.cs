@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class CannonTower : AttackTower
 {
-    private readonly float g = Physics.gravity.y;
+    private readonly float Gravity = Physics.gravity.y;
 
+    [Header("Cannon Settings")]
     [SerializeField] private Transform _cannon;
-    [SerializeField] private Cannonball _cannonball;
     [SerializeField] private float _angleInDegrees;
     [SerializeField] private float _rotationSpeed = 750;
+    [SerializeField] private Cannonball _cannonball;
 
     private Vector3 _directionToTarget;
     private Vector3 _directionInAxisXZ;
@@ -43,6 +44,8 @@ public class CannonTower : AttackTower
 
         Cannonball cannonball = Instantiate(_cannonball, FirePoint.position, Quaternion.identity);
 
+        cannonball.Init(EnemiesLayerMask);
+
         cannonball.GetComponent<Rigidbody>().velocity = FirePoint.forward * speed;
     }
 
@@ -66,7 +69,7 @@ public class CannonTower : AttackTower
 
         float angleInRadians = _angleInDegrees * Mathf.Deg2Rad;
 
-        float speedSquared = (g * x * x) / (2 * (y - Mathf.Tan(angleInRadians) * x) * Mathf.Pow(Mathf.Cos(angleInRadians), 2));
+        float speedSquared = (Gravity * x * x) / (2 * (y - Mathf.Tan(angleInRadians) * x) * Mathf.Pow(Mathf.Cos(angleInRadians), 2));
 
         return Mathf.Sqrt(Mathf.Abs(speedSquared));
     }
