@@ -5,12 +5,14 @@ public class EnemyStateMachine : MonoBehaviour
 {
     [SerializeField] private State _startState;
 
+    protected Enemy Self;
     private State _currentState;
     private Gate _target;
 
     private void Start()
     {
-        _target = GetComponent<Enemy>().Target;
+        Self = GetComponent<Enemy>();
+        _target = Self.Target;
         Reset(_startState);
     }
 
@@ -38,6 +40,6 @@ public class EnemyStateMachine : MonoBehaviour
         _currentState = state;
 
         if (_currentState != null)
-            _currentState.Enter(_target);
+            _currentState.Enter(_target, Self);
     }
 }

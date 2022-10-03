@@ -5,19 +5,21 @@ public abstract class State : MonoBehaviour
     [SerializeField] private Transition[] _transitions;
 
     protected Gate Target { get; set; }
+    protected Enemy Self { get; private set; }
 
-    public void Enter(Gate target)
+    public void Enter(Gate target, Enemy self)
     {
         if (enabled == false)
         {
             enabled = true;
 
             Target = target;
+            Self = self;
 
             foreach (var transition in _transitions)
             {
                 transition.enabled = true;
-                transition.Init(target);
+                transition.Init(target, Self);
             }
         }
     }

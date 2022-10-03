@@ -4,9 +4,7 @@ using UnityEngine.UI;
 public abstract class AttackTower : Tower
 {
     protected const string CheckTargetsMethod = "CheckTargets";
-    protected const float UpdateTargetsPerFrame = 2;
-    
-    [SerializeField] protected Transform FirePoint;
+    protected const float UpdateTargetsPerFrame = 2;    
 
     protected Enemy Target;
 
@@ -42,11 +40,5 @@ public abstract class AttackTower : Tower
         {
             Target = null;
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, FireRange);
     }
 }

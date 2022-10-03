@@ -15100,7 +15100,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1333476717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15116,7 +15116,7 @@ MonoBehaviour:
   _waves:
   - _enemies:
     - {fileID: 3087012538511060368, guid: 0ee911533dbf1364f838d42adc4f7e44, type: 3}
-    _enemiesCount: 5
+    _enemiesCount: 1
     _spawnRate: 1
   _spawnPoint: {fileID: 1333476718}
   _path: {fileID: 904995311}

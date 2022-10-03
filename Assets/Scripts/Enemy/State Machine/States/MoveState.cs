@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(WaypointFollower))]
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator), typeof(WaypointFollower))]
 public class MoveState : State
 {
     private const string Moving = "Moving";
     private const float RotationTime = 0.1f;
 
     [SerializeField] private float _speed;
+    [SerializeField] private float _debuffSpeed;
 
     private Animator _animator;
     private WaypointFollower _follower;
@@ -48,7 +48,10 @@ public class MoveState : State
 
     public void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
+        if (Self.IsFreezing)
+            transform.position = Vector3.MoveTowards(transform.position, _target.position, _debuffSpeed * Time.deltaTime);
+        else
+            transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
     }
 
     public void Rotate()
