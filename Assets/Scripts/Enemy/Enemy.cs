@@ -5,10 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
-    [SerializeField] private ParticleSystem _freezeEffect;
+    [SerializeField] private ParticleSystem _freezeEffectPrefab;
 
     private bool _isFreezing;
-    private Coroutine _freezingCooldown;
+    private ParticleSystem _freezeEffect;
+    private Coroutine _freezeEffectCoroutine;
 
     public event Action<Enemy> Died;
 
@@ -20,6 +21,9 @@ public class Enemy : MonoBehaviour
     {
         IsAlive = true;
         _isFreezing = false;
+
+        _freezeEffect = Instantiate(_freezeEffectPrefab, transform.position, transform.rotation);
+        _freezeEffect.Stop();
     }
 
     public void Init(Gate target)
@@ -40,27 +44,29 @@ public class Enemy : MonoBehaviour
 
     public void Freeze(float freezingTime)
     {
-        _isFreezing = true;
-
-        if (_freezingCooldown != null)
-        {
-            StopCoroutine(FreezingCooldown(freezingTime));
-            _freezingCooldown = StartCoroutine(FreezingCooldown(freezingTime));
-        }
+        if (_freezeEffectCoroutine == null)
+            _freezeEffectCoroutine = StartCoroutine(FreezingCooldown(freezingTime));
         else
-        {
-            _freezingCooldown = StartCoroutine(FreezingCooldown(freezingTime));
-        }        
+            RestartFreeze(freezingTime);
+    }
+
+    private void RestartFreeze(float freezingTime)
+    {
+        StopCoroutine(_freezeEffectCoroutine);
+
+        _freezeEffectCoroutine = null;
+
+        _freezeEffectCoroutine = StartCoroutine(FreezingCooldown(freezingTime));
     }
 
     private IEnumerator FreezingCooldown(float freezingTime)
     {
-        var freezeEffect = Instantiate(_freezeEffect, transform.position, transform.rotation);
+        _isFreezing = true;
+        _freezeEffect.Play();
 
         yield return Helpers.GetTime(freezingTime);
 
         _isFreezing = false;
-
-        Destroy(freezeEffect);
+        _freezeEffect.Stop();
     }
 }

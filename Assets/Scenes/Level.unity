@@ -7805,7 +7805,7 @@ PrefabInstance:
     - target: {fileID: 445651861514680778, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
       propertyPath: _towerPrefab
       value: 
-      objectReference: {fileID: 8394584672328214339, guid: 98344518b0165f040a6fa3f03e1dbc94, type: 3}
+      objectReference: {fileID: 5998435965959747201, guid: 74f04ca8505594b46a0a8621e27e0012, type: 3}
     - target: {fileID: 1125937275263299879, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7892,7 +7892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6499930334982111384, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
       propertyPath: m_Name
-      value: Tower Viewer Right ()
+      value: Tower Viewer Right (Ice)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
