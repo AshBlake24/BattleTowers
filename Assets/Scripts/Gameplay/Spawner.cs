@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private Wave[] _waves;
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private Transform _path;
+    [SerializeField] private Waypoint _startWaypoint;
     [SerializeField] private Gate _target;
 
     public event Action<int, int> EnemyKilled;
@@ -77,7 +77,7 @@ public class Spawner : MonoBehaviour
         enemy.Init(_target);
 
         if (enemy.TryGetComponent(out WaypointFollower follower))
-            follower.Init(_path);
+            follower.Init(_startWaypoint);
 
         enemy.Died += OnEnemyDied;
     }
