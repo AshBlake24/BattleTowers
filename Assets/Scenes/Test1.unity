@@ -15116,7 +15116,7 @@ MonoBehaviour:
   _waves:
   - _enemies:
     - {fileID: 3087012538511060368, guid: 0ee911533dbf1364f838d42adc4f7e44, type: 3}
-    _enemiesCount: 1
+    _enemiesCount: 10
     _spawnRate: 1
   _spawnPoint: {fileID: 1333476718}
   _path: {fileID: 904995311}
