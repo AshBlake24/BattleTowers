@@ -3,21 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class WaypointFollower : MonoBehaviour
 {
-    private Waypoint[] _waypoints;
+    private Waypoint _previousWaypoint;
+    private Waypoint _nextWaypoint;
 
     public Waypoint CurrentWaypoint { get; private set; }
-    public int CurrentWaypointIndex { get; private set; }
-    protected Transform Path { get; private set; }
-
-    private void Start()
-    {
-        _waypoints = Path.GetComponentsInChildren<Waypoint>();
-
-        CurrentWaypointIndex = 0;
-
-        if (_waypoints.Length > 0)
-            CurrentWaypoint = _waypoints[CurrentWaypointIndex];
-    }
 
     private void Update()
     {
@@ -28,18 +17,17 @@ public class WaypointFollower : MonoBehaviour
             SetNextWaypoint();
     }
 
-    public void Init(Transform path)
+    public void Init(Waypoint startWaypoint)
     {
-        Path = path;
+        CurrentWaypoint = startWaypoint;
     }
 
     public void SetNextWaypoint()
     {
-        CurrentWaypointIndex++;
+        do _nextWaypoint = CurrentWaypoint.GetNextWaypoint();
+        while (_previousWaypoint == _nextWaypoint);
 
-        if (CurrentWaypointIndex >= _waypoints.Length)
-            CurrentWaypoint = null;
-        else
-            CurrentWaypoint = _waypoints[CurrentWaypointIndex];
+        _previousWaypoint = CurrentWaypoint;
+        CurrentWaypoint = _nextWaypoint;
     }
 }
