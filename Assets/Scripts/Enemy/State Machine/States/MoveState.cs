@@ -3,8 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator), typeof(WaypointFollower))]
 public class MoveState : State
 {
-    private const string Moving = "Moving";
-    private const float RotationTime = 0.1f;
+    private const float RotationTime = 0.15f;
 
     [SerializeField] private float _speed;
     [SerializeField] private float _debuffSpeed;
@@ -23,12 +22,12 @@ public class MoveState : State
 
     private void OnEnable()
     {
-        _animator.SetBool(Moving, true);
+        _animator.SetBool(AnimatorEnemyController.States.Run, true);
     }
 
     private void OnDisable()
     {
-        _animator.SetBool(Moving, false);
+        _animator.SetBool(AnimatorEnemyController.States.Run, false);
     }
 
     private void Update()
