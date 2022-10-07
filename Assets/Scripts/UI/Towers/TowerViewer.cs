@@ -16,10 +16,11 @@ public class TowerViewer : MonoBehaviour
     [SerializeField] private Color _activeFrameColor;
     [SerializeField] private Color _inactiveFrameColor;
 
-    public event Action<Tower, TowerPlaceholder> ViewerClicked;
+    public event Action ButtonClick;
+    public event Action<Tower, TowerPlace> ViewerClicked;
     
     private Button _button;
-    private TowerPlaceholder _towerPlaceholder;
+    private TowerPlace _towerPlace;
 
     private void Awake()
     {
@@ -30,20 +31,23 @@ public class TowerViewer : MonoBehaviour
 
     private void OnDisable() => _button.onClick.RemoveListener(OnButtonClick);
 
-    public void Init(TowerPlaceholder placeholder, int playerMoney)
+    public void Init(TowerPlace towerPlace, int playerMoney)
     {
-        _towerPlaceholder = placeholder;
+        _towerPlace = towerPlace;
 
         if (playerMoney >= _towerPrefab.Price)
             ActivateViewer();
         else
             DeactivateViewer();
+    }   
+
+    public void Clear() => _towerPlace = null;
+
+    private void OnButtonClick()
+    {
+        ViewerClicked?.Invoke(_towerPrefab, _towerPlace);
+        ButtonClick?.Invoke();
     }
-   
-
-    public void Clear() => _towerPlaceholder = null;
-
-    private void OnButtonClick() => ViewerClicked?.Invoke(_towerPrefab, _towerPlaceholder);
 
     private void ActivateViewer()
     {

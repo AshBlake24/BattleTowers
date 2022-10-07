@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3010558573140843124}
   - component: {fileID: 3010558573140843123}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CannonTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _price: 0
+  _sellPrice: 0
   EnemiesLayerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -116,9 +117,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ee7ef3c4292a7d3459c98503b8589c9e, type: 2}
+    - target: {fileID: -5311082607873097220, guid: 3b2d166a0d81c244ca75def60b65786e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3b2d166a0d81c244ca75def60b65786e, type: 3}
       propertyPath: m_Name
       value: Cannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b2d166a0d81c244ca75def60b65786e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5717209592646566608, guid: 3b2d166a0d81c244ca75def60b65786e, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7696097460479782449, guid: 3b2d166a0d81c244ca75def60b65786e, type: 3}
       propertyPath: m_CastShadows
@@ -202,6 +215,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9ccf4f98cb55b924c9bb52f8a33d2e0c, type: 3}
       propertyPath: m_Name
       value: RoundTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ccf4f98cb55b924c9bb52f8a33d2e0c, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9ccf4f98cb55b924c9bb52f8a33d2e0c, type: 3}
       propertyPath: m_IsActive

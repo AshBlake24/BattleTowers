@@ -3,11 +3,15 @@ using UnityEngine;
 public class TowerBuilder : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private GameObject _selectionMenu;
+    [SerializeField] private TowerMenu _towerMenu;
+    [SerializeField] private GameObject _selectorMenu;
 
     private TowerViewer[] _viewers;
 
-    private void Awake() => _viewers = _selectionMenu.GetComponentsInChildren<TowerViewer>();
+    private void Awake()
+    {
+        _viewers = _selectorMenu.GetComponentsInChildren<TowerViewer>();
+    }
 
     private void OnEnable() 
     { 
@@ -16,6 +20,8 @@ public class TowerBuilder : MonoBehaviour
             foreach (var viewer in _viewers)
                 viewer.ViewerClicked += OnViewerClicked;
         }
+
+        _towerMenu.SellButtonClick += OnSellButtonClick;
     }
 
     private void OnDisable() 
@@ -25,19 +31,24 @@ public class TowerBuilder : MonoBehaviour
             foreach (var viewer in _viewers)
                 viewer.ViewerClicked -= OnViewerClicked;
         }
+
+        _towerMenu.SellButtonClick -= OnSellButtonClick;
     }
 
-    private void OnViewerClicked(Tower tower, TowerPlaceholder placeholder)
+    private void OnViewerClicked(Tower tower, TowerPlace towerPlace)
     {
         if (_player.Money < tower.Price)
             return;
 
-        _player.Buy(tower.Price);
+        _player.TakeMoney(tower.Price);
 
-        Transform towerPlace = placeholder.transform.parent;
+        towerPlace.SetTower(tower);
+    }
 
-        placeholder.gameObject.SetActive(false);
+    private void OnSellButtonClick(TowerPlace towerPlace, int money)
+    {
+        _player.AddMoney(money);
 
-        Instantiate(tower, towerPlace.transform);
+        towerPlace.Clear();
     }
 }

@@ -19,12 +19,19 @@ public class Player : MonoBehaviour
         MoneyChanged?.Invoke(_money);
     }
 
-    public void Buy(int price)
+    public void TakeMoney(int price)
     {
         if ((_money - price) < 0)
             return;
 
         _money -= price;
+
+        MoneyChanged?.Invoke(_money);
+    }
+
+    public void AddMoney(int money)
+    {
+        _money += money;
 
         MoneyChanged?.Invoke(_money);
     }
