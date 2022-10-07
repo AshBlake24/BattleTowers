@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 1864573263628296029}
-  _distanceToTarget: 1
-  _spreadDistance: 0
+  _distanceToTarget: 0.65
+  _spreadDistance: 0.1
 --- !u!114 &7986788446034035064
 MonoBehaviour:
   m_ObjectHideFlags: 0

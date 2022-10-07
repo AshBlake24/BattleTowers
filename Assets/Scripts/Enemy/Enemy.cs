@@ -7,26 +7,25 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _health;
     [SerializeField] private ParticleSystem _freezeEffectPrefab;
 
-    private bool _isFreezing;
     private ParticleSystem _freezeEffect;
     private Coroutine _freezeEffectCoroutine;
 
     public event Action<Enemy> Died;
 
-    public Gate Target { get; private set; }
+    public Gates Target { get; private set; }
     public bool IsAlive { get; private set; }
-    public bool IsFreezing => _isFreezing;
+    public bool IsFreezing { get; private set; }
 
     private void OnEnable()
     {
         IsAlive = true;
-        _isFreezing = false;
+        IsFreezing = false;
 
-        _freezeEffect = Instantiate(_freezeEffectPrefab, transform.position, transform.rotation);
+        _freezeEffect = Instantiate(_freezeEffectPrefab, transform.position, transform.rotation, transform);
         _freezeEffect.Stop();
     }
 
-    public void Init(Gate target)
+    public void Init(Gates target)
     {
         Target = target;
     }
@@ -61,12 +60,12 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator FreezingCooldown(float freezingTime)
     {
-        _isFreezing = true;
+        IsFreezing = true;
         _freezeEffect.Play();
 
         yield return Helpers.GetTime(freezingTime);
 
-        _isFreezing = false;
+        IsFreezing = false;
         _freezeEffect.Stop();
     }
 }

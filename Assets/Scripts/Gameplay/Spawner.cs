@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Wave[] _waves;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Waypoint _startWaypoint;
-    [SerializeField] private Gate _target;
+    [SerializeField] private Gates _target;
 
     public event Action<int, int> EnemyKilled;
     public event Action WaveCleared;

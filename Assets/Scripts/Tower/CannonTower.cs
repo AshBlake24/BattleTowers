@@ -12,10 +12,15 @@ public class CannonTower : AttackTower
 
     private Vector3 _directionToTarget;
     private Vector3 _directionInAxisXZ;
+    private Vector3 _firePointRotationOffset;
+    private Vector3 _cannonRotationOffset;
 
     private void OnEnable() 
     {
-        FirePoint.localEulerAngles = new Vector3(-_angleInDegrees, 0f, 0f);
+        _firePointRotationOffset = FirePoint.transform.eulerAngles;
+        _cannonRotationOffset = _cannon.eulerAngles;
+
+        FirePoint.localEulerAngles = new Vector3(-_angleInDegrees, 0f, 0f) + _firePointRotationOffset;
         InvokeRepeating(CheckTargetsMethod, 0, 1 / UpdateTargetsPerFrame);
     }
 

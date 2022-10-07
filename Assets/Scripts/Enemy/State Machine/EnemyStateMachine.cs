@@ -7,7 +7,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     protected Enemy Self;
     private State _currentState;
-    private Gate _target;
+    private Gates _target;
 
     private void Start()
     {

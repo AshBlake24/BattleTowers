@@ -124,8 +124,8 @@ MonoBehaviour:
   - {fileID: 1188367615723013978}
   - {fileID: 1988972003220849380}
   - {fileID: 6679805349108547509}
-  _speed: 3
-  _debuffSpeed: 2
+  _speed: 1
+  _debuffSpeed: 0.6
 --- !u!114 &1188367615723013978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,8 +139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 3373760167896633816}
-  _distanceToTarget: 1
-  _spreadDistance: 0
+  _distanceToTarget: 0.65
+  _spreadDistance: 0.1
 --- !u!114 &1988972003220849380
 MonoBehaviour:
   m_ObjectHideFlags: 0

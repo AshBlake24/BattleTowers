@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
 
-public class Gate : MonoBehaviour
+public class Gates : MonoBehaviour
 {
     [SerializeField] private int _health;
+    [SerializeField] private Animator _gatesAnimator;
 
     private int _currentHealth;
 
@@ -24,9 +25,12 @@ public class Gate : MonoBehaviour
     {
         _currentHealth -= damage;
 
+        _gatesAnimator.SetTrigger(GatesAnimationController.Triggers.Hit);
+
         if (_currentHealth <= 0)
         {
             IsDestroyed = true;
+            _gatesAnimator.SetBool(GatesAnimationController.Triggers.Destroy, true);
             Destroyed?.Invoke();
         }
 

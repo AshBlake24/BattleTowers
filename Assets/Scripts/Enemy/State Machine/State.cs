@@ -4,10 +4,10 @@ public abstract class State : MonoBehaviour
 {
     [SerializeField] private Transition[] _transitions;
 
-    protected Gate Target { get; set; }
+    protected Gates Target { get; set; }
     protected Enemy Self { get; private set; }
 
-    public void Enter(Gate target, Enemy self)
+    public void Enter(Gates target, Enemy self)
     {
         if (enabled == false)
         {
