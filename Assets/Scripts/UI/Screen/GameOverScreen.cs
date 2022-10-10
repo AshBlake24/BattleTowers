@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class GameOverScreen : MonoBehaviour
+public class GameOverScreen : Screen
 {
     [SerializeField] private Gates _gates;
     [SerializeField] private Player _player;
@@ -15,8 +15,6 @@ public class GameOverScreen : MonoBehaviour
     [SerializeField] private TMP_Text _score;
     [SerializeField] private float _delayBeforeScreen;
 
-    private CanvasGroup _canvasGroup;
-
     private void OnEnable()
     {
         _gates.Destroyed += OnGatesDestroyed;
@@ -24,11 +22,11 @@ public class GameOverScreen : MonoBehaviour
         _menuButton.onClick.AddListener(LoadMenu);
     }
 
-    private void Start()
+    protected override void Start()
     {
-        _canvasGroup = GetComponent<CanvasGroup>();
+        base.Start();
 
-        Disable();
+        Close();
     }
 
     private void OnDisable()
@@ -38,20 +36,11 @@ public class GameOverScreen : MonoBehaviour
         _menuButton.onClick.RemoveListener(LoadMenu);
     }
 
-    private void Enable()
+    protected override void Open()
     {
-        _canvasGroup.alpha = 1.0f;
-        _canvasGroup.interactable = true;
-        _canvasGroup.blocksRaycasts = true;
+        base.Open();
 
         _score.text = $"Score: {_player.Score}";
-    }
-
-    private void Disable()
-    {
-        _canvasGroup.alpha = 0;
-        _canvasGroup.interactable = false;
-        _canvasGroup.blocksRaycasts = false;
     }
 
     private void RestartLevel()
@@ -73,6 +62,6 @@ public class GameOverScreen : MonoBehaviour
     {
         yield return Helpers.GetTime(_delayBeforeScreen);
 
-        Enable();
+        Open();
     }
 }
