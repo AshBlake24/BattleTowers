@@ -124,7 +124,7 @@ MonoBehaviour:
   - {fileID: 6777031887979901346}
   - {fileID: 4792937671392279607}
   - {fileID: 4042576670508272348}
-  _speed: 10
+  _speed: 1
   _debuffSpeed: 0.6
 --- !u!114 &1864573263628296029
 MonoBehaviour:
@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 15
+  _reward: 50
+  _score: 80
   _freezeEffectPrefab: {fileID: 7572306748357295866, guid: a1228cdd9316232478a1f11d02fdad19, type: 3}
 --- !u!114 &3475465157192578886
 MonoBehaviour:
