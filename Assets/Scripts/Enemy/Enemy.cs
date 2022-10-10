@@ -5,6 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
+    [SerializeField] private int _reward;
+    [SerializeField] private int _score;
     [SerializeField] private ParticleSystem _freezeEffectPrefab;
 
     private ParticleSystem _freezeEffect;
@@ -15,6 +17,8 @@ public class Enemy : MonoBehaviour
     public Gates Target { get; private set; }
     public bool IsAlive { get; private set; }
     public bool IsFreezing { get; private set; }
+    public int Reward => _reward;
+    public int Score => _score;
 
     private void OnEnable()
     {

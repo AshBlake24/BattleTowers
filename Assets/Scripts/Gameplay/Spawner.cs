@@ -7,9 +7,12 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Wave[] _waves;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Waypoint _startWaypoint;
+    [SerializeField] private Player _player;
     [SerializeField] private Gates _target;
+    [SerializeField] private float _delayBeforeWave;
 
     public event Action<int, int> EnemyKilled;
+    public event Action<float> WaveStarted;
     public event Action WaveCleared;
 
     private Wave _currentWave;
@@ -61,7 +64,7 @@ public class Spawner : MonoBehaviour
 
         EnemyKilled?.Invoke(_killedEnemies, _maxEnemiesInCurrentWave);
 
-        _spawnEnemies = StartCoroutine(SpawnEnemies());
+        StartCoroutine(LaunchWave());
     }
 
     private void ResetWave()
@@ -86,6 +89,9 @@ public class Spawner : MonoBehaviour
     {
         _killedEnemies++;
 
+        _player.AddMoney(enemy.Reward);
+        _player.AddScore(enemy.Score);
+
         EnemyKilled?.Invoke(_killedEnemies, _maxEnemiesInCurrentWave);
 
         enemy.Died -= OnEnemyDied;
@@ -96,6 +102,15 @@ public class Spawner : MonoBehaviour
         int enemyIndex = UnityEngine.Random.Range(0, _currentWave.Enemies.Length);
 
         return _currentWave.Enemies[enemyIndex];
+    }
+
+    private IEnumerator LaunchWave()
+    {
+        WaveStarted?.Invoke(_delayBeforeWave);
+
+        yield return Helpers.GetTime(_delayBeforeWave);
+
+        _spawnEnemies = StartCoroutine(SpawnEnemies());
     }
 
     private IEnumerator SpawnEnemies()

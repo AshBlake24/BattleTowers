@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 15
+  _reward: 50
+  _score: 80
   _freezeEffectPrefab: {fileID: 7572306748357295866, guid: a1228cdd9316232478a1f11d02fdad19, type: 3}
 --- !u!114 &3475465157192578886
 MonoBehaviour:

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,10 +6,12 @@ public class Player : MonoBehaviour
     [SerializeField] private int _startMoney;
 
     private int _money;
+    private int _score;
 
     public event Action<int> MoneyChanged;
 
     public int Money => _money;
+    public int Score => _score;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
         MoneyChanged?.Invoke(_money);
     }
 
-    public void Buy(int price)
+    public void TakeMoney(int price)
     {
         if ((_money - price) < 0)
             return;
@@ -27,5 +27,17 @@ public class Player : MonoBehaviour
         _money -= price;
 
         MoneyChanged?.Invoke(_money);
+    }
+
+    public void AddMoney(int money)
+    {
+        _money += money;
+
+        MoneyChanged?.Invoke(_money);
+    }
+
+    public void AddScore(int score)
+    {
+        _score += score;
     }
 }

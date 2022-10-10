@@ -6,6 +6,7 @@ public abstract class Tower : MonoBehaviour
     protected const float UpdateTargetsPerFrame = 2;
 
     [SerializeField] private int _price;
+    [SerializeField] private int _sellPrice;
 
     [Header("Tower Settings")]
     [SerializeField] protected LayerMask EnemiesLayerMask;
@@ -16,6 +17,7 @@ public abstract class Tower : MonoBehaviour
     protected float LastShootTime;
 
     public int Price => _price;
+    public int SellPrice => _sellPrice;
 
     private void OnEnable() => LastShootTime = FiringRate;
 

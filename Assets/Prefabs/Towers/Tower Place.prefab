@@ -9,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3799509091916532824}
-  m_Layer: 0
-  m_Name: TowerPlaceholder
+  - component: {fileID: 8969481415163455666}
+  - component: {fileID: 4862625998848274387}
+  m_Layer: 9
+  m_Name: Tower Place
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,6 +34,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8969481415163455666
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311585616789720972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.72961175, y: 0.18282673, z: 0.7052176}
+  m_Center: {x: 0, y: 0.08111645, z: 0}
+--- !u!114 &4862625998848274387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311585616789720972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e4d9c9543a2cd409707375556dc69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4505829955974957060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,6 +118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Placeholder
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3260fc42cf2d88647a9ce50af7803fcb, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3260fc42cf2d88647a9ce50af7803fcb, type: 3}
 --- !u!1 &3622729912172852565 stripped
@@ -98,20 +129,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3260fc42cf2d88647a9ce50af7803fcb, type: 3}
   m_PrefabInstance: {fileID: 4505829955974957060}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7135842005596969660
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3622729912172852565}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9137858, y: 0.23577161, z: 0.88440865}
-  m_Center: {x: 0, y: 0.10215808, z: 0.000000029802322}
---- !u!114 &5492887189455887768
+--- !u!114 &1716927554226145496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +138,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3622729912172852565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e4d9c9543a2cd409707375556dc69c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c17cc8ee149dba4ba74e443d282ad77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &4111035517616713711 stripped
