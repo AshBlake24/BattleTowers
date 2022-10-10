@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1064707720030294163}
   - component: {fileID: 2657159127722152666}
   - component: {fileID: 5025024931471288481}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cannonball Explosion Flames
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,8 +169,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: 5
+      scalar: 5
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -285,8 +285,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.1
-      minScalar: 0.05
+      scalar: 0.08
+      minScalar: 0.03
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4890,7 +4890,7 @@ GameObject:
   - component: {fileID: 7414552305357398424}
   - component: {fileID: 7414552305357398425}
   - component: {fileID: 7414552305357398406}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cannonball Explosion Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5049,7 +5049,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5165,8 +5165,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.06
-      minScalar: 0.02
+      scalar: 0.05
+      minScalar: 0.01
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -8729,7 +8729,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 10000
-    radiusScale: 1
+    radiusScale: 0.01
     collidesWith:
       serializedVersion: 2
       m_Bits: 128

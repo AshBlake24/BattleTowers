@@ -7,18 +7,16 @@ public class CannonTower : AttackTower
     [Header("Cannon Tower Settings")]
     [SerializeField] private Transform _cannon;
     [SerializeField] private float _angleInDegrees;
-    [SerializeField] private float _rotationSpeed = 750;
+    [SerializeField] private float _rotationSpeed = 500;
     [SerializeField] private Cannonball _cannonball;
 
     private Vector3 _directionToTarget;
     private Vector3 _directionInAxisXZ;
     private Vector3 _firePointRotationOffset;
-    private Vector3 _cannonRotationOffset;
 
     private void OnEnable() 
     {
         _firePointRotationOffset = FirePoint.transform.eulerAngles;
-        _cannonRotationOffset = _cannon.eulerAngles;
 
         FirePoint.localEulerAngles = new Vector3(-_angleInDegrees, 0f, 0f) + _firePointRotationOffset;
         InvokeRepeating(CheckTargetsMethod, 0, 1 / UpdateTargetsPerFrame);
@@ -26,8 +24,6 @@ public class CannonTower : AttackTower
 
     private void Update()
     {
-        LastShootTime += Time.deltaTime;
-
         if (Target == null || Target.IsAlive == false)
             return;
 
@@ -41,6 +37,8 @@ public class CannonTower : AttackTower
 
             LastShootTime = 0;
         }
+
+        LastShootTime += Time.deltaTime;
     }
 
     protected override void Shot()
