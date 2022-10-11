@@ -10,9 +10,22 @@ public class CannonTower : AttackTower
     [SerializeField] private float _rotationSpeed = 250;
     [SerializeField] private Cannonball _cannonball;
 
+    [Header("Pool Settings")]
+    [SerializeField] private int _cannonballPoolInitialCapacity;
+
+    private static ObjectsPool<Cannonball> _cannonballPool;
+
     private Vector3 _directionToTarget;
     private Vector3 _directionInAxisXZ;
     private Vector3 _firePointRotationOffset;
+
+    private void Awake()
+    {
+        if (_cannonballPool != null)
+            return;
+
+        _cannonballPool = new ObjectsPool<Cannonball>(_cannonball.gameObject, _cannonballPoolInitialCapacity);
+    }
 
     private void OnEnable() 
     {
@@ -45,10 +58,11 @@ public class CannonTower : AttackTower
     {
         float speed = GetInitialSpeed();
 
-        Cannonball cannonball = Instantiate(_cannonball, FirePoint.position, Quaternion.identity);
+        Cannonball cannonball = _cannonballPool.GetInstanceFromPool();
 
+        cannonball.gameObject.SetActive(true);
+        cannonball.transform.SetPositionAndRotation(FirePoint.position, Quaternion.identity);
         cannonball.Init(EnemiesLayerMask);
-
         cannonball.GetComponent<Rigidbody>().velocity = FirePoint.forward * speed;
     }
 

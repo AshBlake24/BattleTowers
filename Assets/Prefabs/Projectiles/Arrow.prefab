@@ -231,3 +231,4 @@ MonoBehaviour:
   _damage: 8
   _speed: 15
   _impactEffect: {fileID: 2241885019499196910, guid: 45a6cda94e08212409d430f714e935f2, type: 3}
+  _effectPoolInitialCapacity: 3

@@ -58,6 +58,7 @@ MonoBehaviour:
   _angleInDegrees: 20
   _rotationSpeed: 750
   _cannonball: {fileID: 5315841361308701955, guid: a6c6af7917485f546acfc1b6d1104d7e, type: 3}
+  _cannonballPoolInitialCapacity: 5
 --- !u!1001 &3010558571803892048
 PrefabInstance:
   m_ObjectHideFlags: 0

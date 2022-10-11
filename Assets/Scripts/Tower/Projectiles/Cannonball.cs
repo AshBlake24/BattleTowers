@@ -3,11 +3,25 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Cannonball : MonoBehaviour
 {
+    [Header("Projectile Settings")]
     [SerializeField] private int _damage;
     [SerializeField] private float _explosionRadius;
     [SerializeField] private ParticleSystem _explosionEffect;
 
+    [Header("Pool Settings")]
+    [SerializeField] private int _effectPoolInitialCapacity;
+
+    private static ObjectsPool<ParticleSystem> _effectPool;
+
     private LayerMask _enemiesLayerMask;
+
+    private void Awake()
+    {
+        if (_effectPool != null)
+            return;
+
+        _effectPool = new ObjectsPool<ParticleSystem>(_explosionEffect.gameObject, _effectPoolInitialCapacity);
+    }
 
     public void Init(LayerMask layerMask)
     {
@@ -16,11 +30,13 @@ public class Cannonball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Instantiate(_explosionEffect, transform.position, transform.rotation);
+        var effect = Helpers.GetEffectFromPool(_effectPool, transform.position, transform.rotation);
+
+        StartCoroutine(Helpers.DeactivateEffectWithDelay(effect));
 
         Explode();
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void Explode()

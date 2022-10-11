@@ -12,7 +12,7 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] protected LayerMask EnemiesLayerMask;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected float FiringRate;
-    [SerializeField] protected float FireRange;
+    [SerializeField] protected float FireRange;    
 
     protected float LastShootTime;
 

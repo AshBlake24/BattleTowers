@@ -1039,7 +1039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.16, g: 0.16450436, b: 0.2, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1072,8 +1072,8 @@ CanvasGroup:
   m_GameObject: {fileID: 249643300}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &249643305
 MonoBehaviour:
@@ -1185,11 +1185,17 @@ MonoBehaviour:
     - {fileID: 2521105978829538956, guid: 81796293d4b01664eae74e0a10a0952c, type: 3}
     _enemiesCount: 5
     _spawnRate: 1
+  - _enemies:
+    - {fileID: 2521105978829538956, guid: 81796293d4b01664eae74e0a10a0952c, type: 3}
+    - {fileID: 6706615359397696996, guid: b8679efb96921074d821191ba5ff5723, type: 3}
+    _enemiesCount: 5
+    _spawnRate: 1
   _spawnPoint: {fileID: 277063569}
   _startWaypoint: {fileID: 803916928}
+  _delayBeforeWave: 1
   _player: {fileID: 266402646}
   _target: {fileID: 622826645}
-  _delayBeforeWave: 1
+  _enemiesPoolInitialCapacity: 5
 --- !u!1001 &305606166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4107,7 +4113,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 0
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &863122753
 MonoBehaviour:
@@ -5203,7 +5209,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 0
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!95 &1242321258
 Animator:

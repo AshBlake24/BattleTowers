@@ -1,20 +1,24 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [Header("Spawner Settings")]
     [SerializeField] private Wave[] _waves;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Waypoint _startWaypoint;
-    [SerializeField] private Player _player;
-    [SerializeField] private Gates _target;
     [SerializeField] private float _delayBeforeWave;
 
-    public event Action<int, int> EnemyKilled;
-    public event Action<float> WaveStarted;
-    public event Action WaveCleared;
+    [Header("Target Settings")]
+    [SerializeField] private Player _player;
+    [SerializeField] private Gates _target;
+
+    [Header("Pool Settings")]
+    [SerializeField] private int _enemiesPoolInitialCapacity;
+
+    private static Dictionary<EnemyType, ObjectsPool<Enemy>> _enemyPools;
 
     private Wave _currentWave;
     private int _currentWaveIndex;
@@ -23,6 +27,19 @@ public class Spawner : MonoBehaviour
     private int _maxEnemiesInCurrentWave;
     private Coroutine _spawnEnemies;
 
+    public event Action<int, int> EnemyKilled;
+    public event Action<float> WaveStarted;
+    public event Action WaveCleared;
+
+    private void Awake()
+    {
+        if (_enemyPools != null)
+            return;
+
+        _enemyPools = new Dictionary<EnemyType, ObjectsPool<Enemy>>();
+
+        InitializeEnemyPools();
+    }
 
     private void Start()
     {
@@ -76,7 +93,10 @@ public class Spawner : MonoBehaviour
 
     private void InstantiateEnemy()
     {
-        Enemy enemy = Instantiate(GetRandomEnemy(), _spawnPoint);
+        Enemy enemy = _enemyPools[GetRandomEnemy()].GetInstanceFromPool();
+
+        enemy.gameObject.SetActive(true);
+        enemy.transform.position = _spawnPoint.position;
 
         enemy.Init(_target);
 
@@ -103,11 +123,40 @@ public class Spawner : MonoBehaviour
         enemy.Died -= OnEnemyDied;
     }
 
-    private Enemy GetRandomEnemy()
+    private void InitializeEnemyPools()
     {
-        int enemyIndex = UnityEngine.Random.Range(0, _currentWave.Enemies.Length);
+        List<Enemy> enemies = GetAllEnemies();
 
-        return _currentWave.Enemies[enemyIndex];
+        foreach (Enemy enemy in enemies)
+        {
+            if (_enemyPools.ContainsKey(enemy.Type))
+                continue;
+
+            _enemyPools.Add(enemy.Type, new ObjectsPool<Enemy>(enemy.gameObject, _enemiesPoolInitialCapacity));
+        }
+    }
+
+    private EnemyType GetRandomEnemy()
+    {
+        return (EnemyType)UnityEngine.Random.Range(0, _enemyPools.Count);
+    }
+
+    private List<Enemy> GetAllEnemies()
+    {
+        var enemies = new List<Enemy>();
+
+        foreach (Wave wave in _waves)
+        {
+            foreach (Enemy enemy in wave.Enemies)
+            {
+                if (enemies.Contains(enemy))
+                    continue;
+
+                enemies.Add(enemy);
+            }
+        }
+
+        return enemies;
     }
 
     private IEnumerator LaunchWave()

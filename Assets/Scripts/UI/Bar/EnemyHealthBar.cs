@@ -10,7 +10,7 @@ public class EnemyHealthBar : Bar
 
     private void Start()
     {
-        _camera = Camera.main;
+        _camera = Helpers.Camera;
         _canvas = GetComponent<Canvas>();
 
         _canvas.worldCamera = _camera;
@@ -23,7 +23,8 @@ public class EnemyHealthBar : Bar
 
     private void OnDisable()
     {
-        _enemy.HealthChanged -= OnValueChanged;
+        if (_enemy != null)
+            _enemy.HealthChanged -= OnValueChanged;
     }
 
     public void Init(Enemy enemy)

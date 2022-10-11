@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private EnemyType _enemyType;
     [SerializeField] private int _health;
     [SerializeField] private int _reward;
     [SerializeField] private int _score;
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
     public bool IsFreezing { get; private set; }
     public int Reward => _reward;
     public int Score => _score;
+    public EnemyType Type => _enemyType;
 
     private void OnEnable()
     {
@@ -29,7 +31,9 @@ public class Enemy : MonoBehaviour
 
         _currentHealth = _health;
 
-        _freezeEffect = Instantiate(_freezeEffectPrefab, transform.position, transform.rotation, transform);
+        if (_freezeEffect == null)
+            _freezeEffect = Instantiate(_freezeEffectPrefab, transform.position, transform.rotation, transform);
+
         _freezeEffect.Stop();
     }
 
@@ -78,4 +82,10 @@ public class Enemy : MonoBehaviour
         IsFreezing = false;
         _freezeEffect.Stop();
     }
+}
+
+public enum EnemyType
+{
+    Knight,
+    Swordsman
 }

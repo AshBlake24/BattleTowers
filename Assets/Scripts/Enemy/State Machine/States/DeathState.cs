@@ -16,6 +16,6 @@ public class DeathState : State
     {
         _animator.SetTrigger(AnimatorEnemyController.Triggers.Die);
 
-        Destroy(gameObject, DelayBeforeDestroy);
+        StartCoroutine(Helpers.DeactivateObjectWithDelay(gameObject, DelayBeforeDestroy));
     }
 }

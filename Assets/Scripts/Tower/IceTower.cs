@@ -6,7 +6,20 @@ public class IceTower : Tower
     [SerializeField] private ParticleSystem _iceRingEffect;
     [SerializeField] private float _freezingTime;
 
+    [Header("Pool Settings")]
+    [SerializeField] private int _effectPoolInitialCapacity;
+
+    private static ObjectsPool<ParticleSystem> _effectPool;
+
     private Collider[] _colliders;
+
+    private void Awake()
+    {
+        if (_effectPool != null)
+            return;
+
+        _effectPool = new ObjectsPool<ParticleSystem>(_iceRingEffect.gameObject, _effectPoolInitialCapacity);
+    }
 
     private void OnEnable()
     {
@@ -35,13 +48,16 @@ public class IceTower : Tower
 
     protected override void Shot()
     {
-        Instantiate(_iceRingEffect, FirePoint.position, Quaternion.identity);
+        var effect = Helpers.GetEffectFromPool(_effectPool, FirePoint.position, Quaternion.identity);
+
+        StartCoroutine(Helpers.DeactivateEffectWithDelay(effect));
 
         foreach (var collider in _colliders)
         {
             if (collider.gameObject.TryGetComponent(out Enemy enemy))
             {
-                enemy.Freeze(_freezingTime);
+                if (enemy.IsAlive)
+                    enemy.Freeze(_freezingTime);
             }
         }
     }

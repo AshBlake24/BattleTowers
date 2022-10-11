@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 688a4094d8d32e64ba049f1bd4bbbabb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyType: 1
   _health: 10
   _reward: 30
   _score: 60

@@ -2,11 +2,25 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
+    [Header("Projectile Settings")]
     [SerializeField] private int _damage;
     [SerializeField] private int _speed;
     [SerializeField] private ParticleSystem _impactEffect;
 
+    [Header("Pool Settings")]
+    [SerializeField] private int _effectPoolInitialCapacity;
+
+    private static ObjectsPool<ParticleSystem> _effectPool;
+
     private Enemy _target;
+
+    private void Awake()
+    {
+        if (_effectPool != null)
+            return;
+
+        _effectPool = new ObjectsPool<ParticleSystem>(_impactEffect.gameObject, _effectPoolInitialCapacity);
+    }
 
     private void Update()
     {
@@ -34,10 +48,13 @@ public class Arrow : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            Instantiate(_impactEffect, transform.position, transform.rotation);
+            var effect = Helpers.GetEffectFromPool(_effectPool, transform.position, transform.rotation);
+
+            StartCoroutine(Helpers.DeactivateEffectWithDelay(effect));
+
             enemy.TakeDamage(_damage);
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
