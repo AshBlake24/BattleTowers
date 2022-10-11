@@ -7,7 +7,7 @@ public class CannonTower : AttackTower
     [Header("Cannon Tower Settings")]
     [SerializeField] private Transform _cannon;
     [SerializeField] private float _angleInDegrees;
-    [SerializeField] private float _rotationSpeed = 500;
+    [SerializeField] private float _rotationSpeed = 250;
     [SerializeField] private Cannonball _cannonball;
 
     private Vector3 _directionToTarget;

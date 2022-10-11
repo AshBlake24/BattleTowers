@@ -11,8 +11,10 @@ public class Enemy : MonoBehaviour
 
     private ParticleSystem _freezeEffect;
     private Coroutine _freezeEffectCoroutine;
+    private int _currentHealth;
 
     public event Action<Enemy> Died;
+    public event Action<int, int> HealthChanged;
 
     public Gates Target { get; private set; }
     public bool IsAlive { get; private set; }
@@ -25,6 +27,8 @@ public class Enemy : MonoBehaviour
         IsAlive = true;
         IsFreezing = false;
 
+        _currentHealth = _health;
+
         _freezeEffect = Instantiate(_freezeEffectPrefab, transform.position, transform.rotation, transform);
         _freezeEffect.Stop();
     }
@@ -36,9 +40,11 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _health -= damage;
+        _currentHealth -= damage;
 
-        if (_health <= 0)
+        HealthChanged?.Invoke(_currentHealth, _health);
+
+        if (_currentHealth <= 0)
         {
             IsAlive = false;
             Died?.Invoke(this);

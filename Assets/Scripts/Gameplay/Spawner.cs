@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -37,7 +38,7 @@ public class Spawner : MonoBehaviour
             {
                 StopCoroutine(_spawnEnemies);
                 _spawnEnemies = null;
-            }                
+            }
         }
 
         if (_killedEnemies >= _maxEnemiesInCurrentWave)
@@ -81,6 +82,11 @@ public class Spawner : MonoBehaviour
 
         if (enemy.TryGetComponent(out WaypointFollower follower))
             follower.Init(_startWaypoint);
+
+        var enemyHealthBar = enemy.GetComponentInChildren<EnemyHealthBar>();
+
+        if (enemyHealthBar != null)
+            enemyHealthBar.Init(enemy);
 
         enemy.Died += OnEnemyDied;
     }

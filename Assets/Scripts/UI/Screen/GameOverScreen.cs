@@ -22,9 +22,9 @@ public class GameOverScreen : Screen
         _menuButton.onClick.AddListener(LoadMenu);
     }
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         Close();
     }

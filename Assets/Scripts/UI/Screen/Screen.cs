@@ -5,7 +5,7 @@ public abstract class Screen : MonoBehaviour
 {
     protected CanvasGroup CanvasGroup;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         CanvasGroup = GetComponent<CanvasGroup>();
     }

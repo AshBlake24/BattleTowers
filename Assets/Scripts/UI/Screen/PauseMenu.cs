@@ -1,23 +1,26 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenu : Screen
 {
     [SerializeField] private Button _pauseMenu;
     [SerializeField] private Button _resumeButton;
+    [SerializeField] private Button _restartButton;
     [SerializeField] private Button _menuButton;
 
     private void OnEnable()
     {
         _pauseMenu.onClick.AddListener(OnPauseButtonClick);
         _resumeButton.onClick.AddListener(OnResumeButtonClick);
+        _restartButton.onClick.AddListener(OnRestartButtonClick);
         _menuButton.onClick.AddListener(OnMenuButtonClick);
     }
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         Close();
     }
@@ -26,6 +29,7 @@ public class PauseMenu : Screen
     {
         _pauseMenu.onClick.RemoveListener(OnPauseButtonClick);
         _resumeButton.onClick.RemoveListener(OnResumeButtonClick);
+        _restartButton.onClick.RemoveListener(OnRestartButtonClick);
         _menuButton.onClick.RemoveListener(OnMenuButtonClick);
     }
 
@@ -46,6 +50,11 @@ public class PauseMenu : Screen
     private void OnPauseButtonClick() => Open();
 
     private void OnResumeButtonClick() => Close();
+
+    private void OnRestartButtonClick()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     private void OnMenuButtonClick()
     {
