@@ -14,12 +14,10 @@ public class Arrow : MonoBehaviour
 
     private Enemy _target;
 
-    private void Awake()
+    private void OnEnable()
     {
-        if (_effectPool != null)
-            return;
-
-        _effectPool = new ObjectsPool<ParticleSystem>(_impactEffect.gameObject, _effectPoolInitialCapacity);
+        if (_effectPool == null)
+            _effectPool = new ObjectsPool<ParticleSystem>(_impactEffect.gameObject, _effectPoolInitialCapacity);
     }
 
     private void Update()

@@ -1152,7 +1152,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &277063569
 Transform:
   m_ObjectHideFlags: 0
@@ -1180,12 +1180,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256ace0aa5b638f4db4dad0611a81d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waves:
-  - _enemies:
+  _wave:
+    _enemies:
     - {fileID: 2521105978829538956, guid: 81796293d4b01664eae74e0a10a0952c, type: 3}
     - {fileID: 6706615359397696996, guid: b8679efb96921074d821191ba5ff5723, type: 3}
-    _enemiesCount: 10
-    _spawnRate: 1
+    _startEnemiesCount: 1
+    _enemiesMultiplier: 2
+    _spawnRate: 1.5
   _spawnPoint: {fileID: 277063569}
   _startWaypoint: {fileID: 803916928}
   _delayBeforeWave: 1

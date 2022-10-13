@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
         IsFreezing = false;
 
         _currentHealth = _health;
+        TakeDamage(1);
+        HealthChanged?.Invoke(_currentHealth, _health);
 
         if (_freezeEffect == null)
             _freezeEffect = Instantiate(_freezeEffectPrefab, transform.position, transform.rotation, transform);
@@ -40,6 +42,11 @@ public class Enemy : MonoBehaviour
     public void Init(Gates target)
     {
         Target = target;
+
+        var stateMachine = GetComponent<EnemyStateMachine>();
+
+        if (stateMachine != null)
+            stateMachine.Init(Target, this);
     }
 
     public void TakeDamage(int damage)

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [Header("Spawner Settings")]
-    [SerializeField] private Wave[] _waves;
+    [SerializeField] private Wave _wave;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Waypoint _startWaypoint;
     [SerializeField] private float _delayBeforeWave;
@@ -20,8 +20,7 @@ public class Spawner : MonoBehaviour
 
     private static Dictionary<EnemyType, ObjectsPool<Enemy>> _enemyPools;
 
-    private Wave _currentWave;
-    private int _currentWaveIndex;
+    private int _currentWaveNumber;
     private int _spawnedEnemies;
     private int _killedEnemies;
     private int _maxEnemiesInCurrentWave;
@@ -31,20 +30,19 @@ public class Spawner : MonoBehaviour
     public event Action<float> WaveStarted;
     public event Action WaveCleared;
 
-    private void Awake()
+    private void OnEnable()
     {
-        if (_enemyPools != null)
-            return;
+        if (_enemyPools == null)
+        {
+            _enemyPools = new Dictionary<EnemyType, ObjectsPool<Enemy>>();
+            InitializeEnemyPools();
+        }
 
-        _enemyPools = new Dictionary<EnemyType, ObjectsPool<Enemy>>();
+        _currentWaveNumber = 1;
 
-        InitializeEnemyPools();
-    }
+        _wave.ResetToDefault();
 
-    private void Start()
-    {
-        if (_waves != null & _waves.Length > 0)
-            SetWave(_currentWaveIndex);
+        SetWave();
     }
 
     private void Update()
@@ -62,32 +60,28 @@ public class Spawner : MonoBehaviour
         {
             _killedEnemies = 0;
             WaveCleared?.Invoke();
+            SetNextWave();
         }
     }
 
-    public void SetNextWave()
+    private void SetWave()
     {
-        if (_waves.Length > _currentWaveIndex + 1)
-            SetWave(++_currentWaveIndex);
-    }
-
-    private void SetWave(int index)
-    {
-        if (_currentWave != null)
-            ResetWave();
-
-        _currentWave = _waves[index];
-        _maxEnemiesInCurrentWave = _currentWave.EnemiesCount;
+        _wave.SetDifficulty(_currentWaveNumber);
+        _maxEnemiesInCurrentWave = _wave.EnemiesCount;
         _killedEnemies = 0;
-
-        EnemyKilled?.Invoke(_killedEnemies, _maxEnemiesInCurrentWave);
 
         StartCoroutine(LaunchWave());
     }
 
+    private void SetNextWave()
+    {
+        _currentWaveNumber++;
+
+        SetWave();
+    }
+
     private void ResetWave()
     {
-        _currentWave = null;
         _spawnedEnemies = 0;
     }
 
@@ -125,7 +119,7 @@ public class Spawner : MonoBehaviour
 
     private void InitializeEnemyPools()
     {
-        List<Enemy> enemies = GetAllEnemies();
+        Enemy[] enemies = _wave.GetEnemies();
 
         foreach (Enemy enemy in enemies)
         {
@@ -141,42 +135,25 @@ public class Spawner : MonoBehaviour
         return (EnemyType)UnityEngine.Random.Range(0, _enemyPools.Count);
     }
 
-    private List<Enemy> GetAllEnemies()
-    {
-        var enemies = new List<Enemy>();
-
-        foreach (Wave wave in _waves)
-        {
-            foreach (Enemy enemy in wave.Enemies)
-            {
-                if (enemies.Contains(enemy))
-                    continue;
-
-                enemies.Add(enemy);
-            }
-        }
-
-        return enemies;
-    }
-
     private IEnumerator LaunchWave()
     {
         WaveStarted?.Invoke(_delayBeforeWave);
 
         yield return Helpers.GetTime(_delayBeforeWave);
 
+        EnemyKilled?.Invoke(_killedEnemies, _maxEnemiesInCurrentWave);
         _spawnEnemies = StartCoroutine(SpawnEnemies());
     }
 
     private IEnumerator SpawnEnemies()
     {
-        while (_spawnedEnemies < _currentWave.EnemiesCount)
+        while (_spawnedEnemies < _wave.EnemiesCount)
         {
             InstantiateEnemy();
 
             _spawnedEnemies++;
 
-            yield return Helpers.GetTime(_currentWave.SpawnRate);
+            yield return Helpers.GetTime(_wave.SpawnRate);
         }
 
         ResetWave();
@@ -185,12 +162,32 @@ public class Spawner : MonoBehaviour
     [Serializable]
     private class Wave
     {
+        [Header("Wave Settings")]
         [SerializeField] private Enemy[] _enemies;
-        [SerializeField] private int _enemiesCount;
+        [SerializeField] private int _startEnemiesCount;
+        [SerializeField] private int _enemiesMultiplier;
         [SerializeField] private float _spawnRate;
 
-        public Enemy[] Enemies => _enemies;
-        public int EnemiesCount => _enemiesCount;
         public float SpawnRate => _spawnRate;
+        public int EnemiesCount { get; private set; }
+
+        public void ResetToDefault()
+        {
+            EnemiesCount = _startEnemiesCount - _enemiesMultiplier;
+        }
+
+        public void SetDifficulty(int waveNumber)
+        {
+            EnemiesCount += waveNumber * _enemiesMultiplier;
+        }
+
+        public Enemy[] GetEnemies()
+        {
+            Enemy[] enemies = new Enemy[_enemies.Length];
+
+            _enemies.CopyTo(enemies, 0);
+
+            return enemies;
+        }
     }
 }

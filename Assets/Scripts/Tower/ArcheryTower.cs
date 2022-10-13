@@ -10,16 +10,11 @@ public class ArcheryTower : AttackTower
 
     private static ObjectsPool<Arrow> _arrowPool;
 
-    private void Awake()
-    {
-        if (_arrowPool != null)
-            return;
-
-        _arrowPool = new ObjectsPool<Arrow>(_arrow.gameObject, _arrowPoolInitialCapacity);
-    }
-
     private void OnEnable()
     {
+        if (_arrowPool == null)
+            _arrowPool = new ObjectsPool<Arrow>(_arrow.gameObject, _arrowPoolInitialCapacity);
+
         InvokeRepeating(CheckTargetsMethod, 0, 1 / UpdateTargetsPerFrame);
     }
 

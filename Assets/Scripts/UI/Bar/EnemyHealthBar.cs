@@ -16,6 +16,11 @@ public class EnemyHealthBar : Bar
         _canvas.worldCamera = _camera;
     }
 
+    private void OnEnable()
+    {
+        ResetFiller();
+    }
+
     private void Update()
     {
         transform.rotation = Quaternion.Euler(_rotationOffset);

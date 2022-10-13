@@ -19,16 +19,11 @@ public class CannonTower : AttackTower
     private Vector3 _directionInAxisXZ;
     private Vector3 _firePointRotationOffset;
 
-    private void Awake()
-    {
-        if (_cannonballPool != null)
-            return;
-
-        _cannonballPool = new ObjectsPool<Cannonball>(_cannonball.gameObject, _cannonballPoolInitialCapacity);
-    }
-
     private void OnEnable() 
     {
+        if (_cannonballPool == null)
+            _cannonballPool = new ObjectsPool<Cannonball>(_cannonball.gameObject, _cannonballPoolInitialCapacity);
+
         _firePointRotationOffset = FirePoint.transform.eulerAngles;
 
         FirePoint.localEulerAngles = new Vector3(-_angleInDegrees, 0f, 0f) + _firePointRotationOffset;

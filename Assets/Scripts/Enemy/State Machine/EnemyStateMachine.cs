@@ -4,16 +4,17 @@ using UnityEngine;
 public class EnemyStateMachine : MonoBehaviour
 {
     [SerializeField] private State _startState;
-
+    
     protected Enemy Self;
     private State _currentState;
     private Gates _target;
+    private State[] _states;
+    private Transition[] _transitions;
 
     private void Start()
     {
-        Self = GetComponent<Enemy>();
-        _target = Self.Target;
-        Reset(_startState);
+        _states = GetComponents<State>();
+        _transitions = GetComponents<Transition>();
     }
 
     private void Update()
@@ -27,9 +28,12 @@ public class EnemyStateMachine : MonoBehaviour
             ChangeState(nextState);
     }
 
-    private void Reset(State startState)
+    public void Init(Gates target, Enemy self)
     {
-        ChangeState(startState);
+        Self = self;
+        _target = target;
+
+        ResetToDefault();
     }
 
     private void ChangeState(State state)
@@ -41,5 +45,22 @@ public class EnemyStateMachine : MonoBehaviour
 
         if (_currentState != null)
             _currentState.Enter(_target, Self);
+    }
+
+    private void ResetToDefault()
+    {
+        if (_states != null)
+        {
+            foreach (var state in _states)
+                state.enabled = false;
+        }
+
+        if (_transitions != null)
+        {
+            foreach (var transition in _transitions)
+                transition.enabled = false;
+        }
+
+        ChangeState(_startState);
     }
 }

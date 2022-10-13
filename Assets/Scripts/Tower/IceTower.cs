@@ -13,16 +13,11 @@ public class IceTower : Tower
 
     private Collider[] _colliders;
 
-    private void Awake()
-    {
-        if (_effectPool != null)
-            return;
-
-        _effectPool = new ObjectsPool<ParticleSystem>(_iceRingEffect.gameObject, _effectPoolInitialCapacity);
-    }
-
     private void OnEnable()
     {
+        if (_effectPool == null)
+            _effectPool = new ObjectsPool<ParticleSystem>(_iceRingEffect.gameObject, _effectPoolInitialCapacity);
+
         InvokeRepeating(CheckTargetsMethod, 0, 1 / UpdateTargetsPerFrame);
     }
 
