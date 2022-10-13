@@ -48,9 +48,7 @@ public class IceTower : Tower
 
     protected override void Shot()
     {
-        var effect = Helpers.GetEffectFromPool(_effectPool, FirePoint.position, Quaternion.identity);
-
-        StartCoroutine(Helpers.DeactivateEffectWithDelay(effect));
+        Helpers.ActivateEffectFromPool(_effectPool, FirePoint.position, Quaternion.identity);
 
         foreach (var collider in _colliders)
         {

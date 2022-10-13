@@ -7,6 +7,7 @@ public class Cannonball : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private float _explosionRadius;
     [SerializeField] private ParticleSystem _explosionEffect;
+    [SerializeField] private Vector3 _effectPositionOffset;
 
     [Header("Pool Settings")]
     [SerializeField] private int _effectPoolInitialCapacity;
@@ -30,9 +31,7 @@ public class Cannonball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var effect = Helpers.GetEffectFromPool(_effectPool, transform.position, transform.rotation);
-
-        StartCoroutine(Helpers.DeactivateEffectWithDelay(effect));
+        Helpers.ActivateEffectFromPool(_effectPool, transform.position + _effectPositionOffset, transform.rotation);
 
         Explode();
 

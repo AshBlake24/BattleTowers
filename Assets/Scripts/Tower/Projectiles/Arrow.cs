@@ -48,9 +48,7 @@ public class Arrow : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            var effect = Helpers.GetEffectFromPool(_effectPool, transform.position, transform.rotation);
-
-            StartCoroutine(Helpers.DeactivateEffectWithDelay(effect));
+            Helpers.ActivateEffectFromPool(_effectPool, transform.position, transform.rotation);
 
             enemy.TakeDamage(_damage);
         }
