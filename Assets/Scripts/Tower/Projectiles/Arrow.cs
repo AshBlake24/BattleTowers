@@ -17,7 +17,7 @@ public class Arrow : MonoBehaviour
     private void OnEnable()
     {
         if (_effectPool == null)
-            _effectPool = new ObjectsPool<ParticleSystem>(_impactEffect.gameObject, _effectPoolInitialCapacity);
+            _effectPool = new ObjectsPool<ParticleSystem>(_impactEffect.gameObject);
     }
 
     private void Update()
@@ -46,7 +46,10 @@ public class Arrow : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            Helpers.ActivateEffectFromPool(_effectPool, transform.position, transform.rotation);
+            var effect = _effectPool.GetInstance();
+
+            effect.gameObject.SetActive(true);
+            effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
 
             enemy.TakeDamage(_damage);
         }

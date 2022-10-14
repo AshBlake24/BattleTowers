@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _health;
     [SerializeField] private int _reward;
     [SerializeField] private int _score;
+    [SerializeField] private int _delayBeforeDestroy;
     [SerializeField] private ParticleSystem _freezeEffectPrefab;
 
     private ParticleSystem _freezeEffect;
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
     public bool IsFreezing { get; private set; }
     public int Reward => _reward;
     public int Score => _score;
+    public int DelayBeforeDestroy => _delayBeforeDestroy;
     public EnemyType Type => _enemyType;
 
     private void OnEnable()
@@ -30,7 +32,6 @@ public class Enemy : MonoBehaviour
         IsFreezing = false;
 
         _currentHealth = _health;
-        TakeDamage(1);
         HealthChanged?.Invoke(_currentHealth, _health);
 
         if (_freezeEffect == null)

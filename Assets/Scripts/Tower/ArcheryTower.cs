@@ -13,7 +13,7 @@ public class ArcheryTower : AttackTower
     private void OnEnable()
     {
         if (_arrowPool == null)
-            _arrowPool = new ObjectsPool<Arrow>(_arrow.gameObject, _arrowPoolInitialCapacity);
+            _arrowPool = new ObjectsPool<Arrow>(_arrow.gameObject);
 
         InvokeRepeating(CheckTargetsMethod, 0, 1 / UpdateTargetsPerFrame);
     }
@@ -35,7 +35,7 @@ public class ArcheryTower : AttackTower
 
     protected override void Shot()
     {
-        Arrow arrow = _arrowPool.GetInstanceFromPool();
+        Arrow arrow = _arrowPool.GetInstance();
 
         arrow.gameObject.SetActive(true);
         arrow.transform.SetPositionAndRotation(FirePoint.transform.position, FirePoint.transform.rotation);

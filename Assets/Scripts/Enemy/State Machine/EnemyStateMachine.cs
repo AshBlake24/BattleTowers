@@ -28,6 +28,11 @@ public class EnemyStateMachine : MonoBehaviour
             ChangeState(nextState);
     }
 
+    private void OnDisable()
+    {
+        ResetToDefault();
+    }
+
     public void Init(Gates target, Enemy self)
     {
         Self = self;

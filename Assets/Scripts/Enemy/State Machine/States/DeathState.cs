@@ -1,10 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class DeathState : State
 {
-    [SerializeField] private int DelayBeforeDestroy;
-
     private Animator _animator;
 
     private void Awake()
@@ -15,7 +14,5 @@ public class DeathState : State
     private void OnEnable()
     {
         _animator.SetTrigger(AnimatorEnemyController.Triggers.Die);
-
-        StartCoroutine(Helpers.DeactivateObjectWithDelay(gameObject, DelayBeforeDestroy));
     }
 }

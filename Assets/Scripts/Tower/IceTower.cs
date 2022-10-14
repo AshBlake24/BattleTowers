@@ -16,7 +16,7 @@ public class IceTower : Tower
     private void OnEnable()
     {
         if (_effectPool == null)
-            _effectPool = new ObjectsPool<ParticleSystem>(_iceRingEffect.gameObject, _effectPoolInitialCapacity);
+            _effectPool = new ObjectsPool<ParticleSystem>(_iceRingEffect.gameObject);
 
         InvokeRepeating(CheckTargetsMethod, 0, 1 / UpdateTargetsPerFrame);
     }
@@ -43,7 +43,10 @@ public class IceTower : Tower
 
     protected override void Shot()
     {
-        Helpers.ActivateEffectFromPool(_effectPool, FirePoint.position, Quaternion.identity);
+        var effect = _effectPool.GetInstance();
+
+        effect.gameObject.SetActive(true);
+        effect.transform.SetPositionAndRotation(FirePoint.position, Quaternion.identity);
 
         foreach (var collider in _colliders)
         {

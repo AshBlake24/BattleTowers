@@ -19,7 +19,7 @@ public class Cannonball : MonoBehaviour
     private void OnEnable()
     {
         if (_effectPool == null)
-            _effectPool = new ObjectsPool<ParticleSystem>(_explosionEffect.gameObject, _effectPoolInitialCapacity);
+            _effectPool = new ObjectsPool<ParticleSystem>(_explosionEffect.gameObject);
     }
 
     public void Init(LayerMask layerMask)
@@ -29,7 +29,10 @@ public class Cannonball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Helpers.ActivateEffectFromPool(_effectPool, transform.position + _effectPositionOffset, transform.rotation);
+        var effect = _effectPool.GetInstance();
+
+        effect.gameObject.SetActive(true);
+        effect.transform.SetPositionAndRotation(transform.position + _effectPositionOffset, transform.rotation);
 
         Explode();
 

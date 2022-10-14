@@ -56,8 +56,9 @@ public class Spawner : MonoBehaviour
             }
         }
 
-        if (_killedEnemies >= _maxEnemiesInCurrentWave)
+        if (_killedEnemies >= _wave.EnemiesCount)
         {
+            Debug.Log("Killed enemies");
             _killedEnemies = 0;
             WaveCleared?.Invoke();
             SetNextWave();
@@ -67,7 +68,6 @@ public class Spawner : MonoBehaviour
     private void SetWave()
     {
         _wave.SetDifficulty(_currentWaveNumber);
-        _maxEnemiesInCurrentWave = _wave.EnemiesCount;
         _killedEnemies = 0;
 
         StartCoroutine(LaunchWave());
@@ -87,7 +87,7 @@ public class Spawner : MonoBehaviour
 
     private void InstantiateEnemy()
     {
-        Enemy enemy = _enemyPools[GetRandomEnemy()].GetInstanceFromPool();
+        Enemy enemy = _enemyPools[GetRandomEnemy()].GetInstance();
 
         enemy.gameObject.SetActive(true);
         enemy.transform.position = _spawnPoint.position;
@@ -107,12 +107,14 @@ public class Spawner : MonoBehaviour
 
     private void OnEnemyDied(Enemy enemy)
     {
+        _enemyPools[enemy.Type].AddInstance(enemy);
+
         _killedEnemies++;
 
         _player.AddMoney(enemy.Reward);
         _player.AddScore(enemy.Score);
 
-        EnemyKilled?.Invoke(_killedEnemies, _maxEnemiesInCurrentWave);
+        EnemyKilled?.Invoke(_killedEnemies, _wave.EnemiesCount);
 
         enemy.Died -= OnEnemyDied;
     }
@@ -126,7 +128,7 @@ public class Spawner : MonoBehaviour
             if (_enemyPools.ContainsKey(enemy.Type))
                 continue;
 
-            _enemyPools.Add(enemy.Type, new ObjectsPool<Enemy>(enemy.gameObject, _enemiesPoolInitialCapacity));
+            _enemyPools.Add(enemy.Type, new ObjectsPool<Enemy>(enemy.gameObject));
         }
     }
 
@@ -137,11 +139,13 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator LaunchWave()
     {
+        Debug.Log("Launch Wave");
+
         WaveStarted?.Invoke(_delayBeforeWave);
 
         yield return Helpers.GetTime(_delayBeforeWave);
 
-        EnemyKilled?.Invoke(_killedEnemies, _maxEnemiesInCurrentWave);
+        EnemyKilled?.Invoke(_killedEnemies, _wave.EnemiesCount);
         _spawnEnemies = StartCoroutine(SpawnEnemies());
     }
 
@@ -149,12 +153,16 @@ public class Spawner : MonoBehaviour
     {
         while (_spawnedEnemies < _wave.EnemiesCount)
         {
+            Debug.Log("Spawn Enemies");
+
             InstantiateEnemy();
 
             _spawnedEnemies++;
 
             yield return Helpers.GetTime(_wave.SpawnRate);
         }
+
+        Debug.Log("Spawn Done");
 
         ResetWave();
     }

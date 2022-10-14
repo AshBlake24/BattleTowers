@@ -22,7 +22,7 @@ public class CannonTower : AttackTower
     private void OnEnable() 
     {
         if (_cannonballPool == null)
-            _cannonballPool = new ObjectsPool<Cannonball>(_cannonball.gameObject, _cannonballPoolInitialCapacity);
+            _cannonballPool = new ObjectsPool<Cannonball>(_cannonball.gameObject);
 
         _firePointRotationOffset = FirePoint.transform.eulerAngles;
 
@@ -53,7 +53,7 @@ public class CannonTower : AttackTower
     {
         float speed = GetInitialSpeed();
 
-        Cannonball cannonball = _cannonballPool.GetInstanceFromPool();
+        Cannonball cannonball = _cannonballPool.GetInstance();
 
         cannonball.gameObject.SetActive(true);
         cannonball.transform.SetPositionAndRotation(FirePoint.position, Quaternion.identity);

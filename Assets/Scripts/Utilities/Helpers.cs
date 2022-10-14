@@ -36,25 +36,4 @@ public static class Helpers
     }
 
     #endregion Time
-
-    #region Pool
-
-    public static void ActivateEffectFromPool(ObjectsPool<ParticleSystem> pool, Vector3 position, Quaternion rotation)
-    {
-        ParticleSystem effect = pool.GetInstanceFromPool();
-
-        effect.gameObject.SetActive(true);
-        effect.transform.SetPositionAndRotation(position, rotation);
-
-        effect.Play();
-    }
-
-    public static IEnumerator DeactivateObjectWithDelay(GameObject instance, float delay)
-    {
-        yield return GetTime(delay);
-
-        instance.SetActive(false);
-    }
-
-    #endregion
 }

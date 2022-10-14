@@ -1,15 +1,13 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class ObjectsPool<T> where T : Component
 {
-    private int _capacity;
     private GameObject _prefab;
     private Transform _poolContainer;
-    private List<T> _pool = new List<T>();
+    private Queue<T> _poolQueue = new Queue<T>();
 
-    public ObjectsPool(GameObject prefab, int capacity)
+    public ObjectsPool(GameObject prefab)
     {
         if (prefab == null)
             Debug.LogError("Prefab is null!");
@@ -18,19 +16,23 @@ public class ObjectsPool<T> where T : Component
             Debug.LogError($"Prefab has no: {typeof(T)} component!");
 
         _prefab = prefab;
-        _capacity = capacity;
 
-        CreatePool();
+        _poolContainer = new GameObject($"Pool - {_prefab.name}").transform;
     }
 
-    public T GetInstanceFromPool()
+    public T GetInstance()
     {
-        T item = _pool.FirstOrDefault(item => item.gameObject.activeSelf == false);
-
-        if (item != null)
-            return item;
-        else
+        if (_poolQueue.Count <= 0)
             return CreateNewInstance();
+
+        return _poolQueue.Dequeue();
+    }
+
+    public void AddInstance(T instance)
+    {
+        _poolQueue.Enqueue(instance);
+
+        instance.gameObject.SetActive(false);
     }
 
     private T CreateNewInstance()
@@ -39,22 +41,6 @@ public class ObjectsPool<T> where T : Component
 
         T component = item.GetComponent<T>();
 
-        _pool.Add(component);
-
-        item.SetActive(false);
-
         return component;
-    }
-
-    private void CreatePool()
-    {
-        _poolContainer = new GameObject($"Pool - {_prefab.name}").transform;
-
-        Object.DontDestroyOnLoad(_poolContainer);
-
-        for (int i = 0; i < _capacity; i++)
-        {
-            CreateNewInstance();
-        }
     }
 }
