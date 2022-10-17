@@ -35,4 +35,18 @@ public static class Helpers
     }
 
     #endregion Time
+
+    #region Pool
+
+    private static Transform _generalPoolsContainer;
+
+    public static Transform GetGeneralPoolsContainer()
+    {
+        if (_generalPoolsContainer == null)
+            _generalPoolsContainer = new GameObject($"Pools").transform;
+
+        return _generalPoolsContainer;
+    }
+
+    #endregion
 }

@@ -1,33 +1,37 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private Wave[] _waves;
+    [Header("Wave Settings")]
+    [SerializeField] private Wave _wave;
+
+    [Header("Spawner Settings")]
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Waypoint _startWaypoint;
+    [SerializeField] private float _delayBeforeWave;
+
+    [Header("Target Settings")]
     [SerializeField] private Player _player;
     [SerializeField] private Gates _target;
-    [SerializeField] private float _delayBeforeWave;
 
     public event Action<int, int> EnemyKilled;
     public event Action<float> WaveStarted;
     public event Action WaveCleared;
 
-    private Wave _currentWave;
-    private int _currentWaveIndex;
+    private int _currentWaveNumber;
     private int _spawnedEnemies;
     private int _killedEnemies;
-    private int _maxEnemiesInCurrentWave;
     private Coroutine _spawnEnemies;
-
 
     private void Start()
     {
-        if (_waves != null & _waves.Length > 0)
-            SetWave(_currentWaveIndex);
+        _currentWaveNumber = 1;
+
+        _wave.ResetToDefault();
+
+        SetWave();
     }
 
     private void Update()
@@ -41,36 +45,30 @@ public class Spawner : MonoBehaviour
             }
         }
 
-        if (_killedEnemies >= _maxEnemiesInCurrentWave)
+        if (_killedEnemies >= _wave.EnemiesCount)
         {
             _killedEnemies = 0;
             WaveCleared?.Invoke();
+            SetNextWave();
         }
     }
 
-    public void SetNextWave()
+    private void SetWave()
     {
-        if (_waves.Length > _currentWaveIndex + 1)
-            SetWave(++_currentWaveIndex);
-    }
-
-    private void SetWave(int index)
-    {
-        if (_currentWave != null)
-            ResetWave();
-
-        _currentWave = _waves[index];
-        _maxEnemiesInCurrentWave = _currentWave.EnemiesCount;
+        _wave.SetDifficulty(_currentWaveNumber);
         _killedEnemies = 0;
-
-        EnemyKilled?.Invoke(_killedEnemies, _maxEnemiesInCurrentWave);
 
         StartCoroutine(LaunchWave());
     }
 
+    private void SetNextWave()
+    {
+        _currentWaveNumber++;
+        SetWave();
+    }
+
     private void ResetWave()
     {
-        _currentWave = null;
         _spawnedEnemies = 0;
     }
 
@@ -98,16 +96,16 @@ public class Spawner : MonoBehaviour
         _player.AddMoney(enemy.Reward);
         _player.AddScore(enemy.Score);
 
-        EnemyKilled?.Invoke(_killedEnemies, _maxEnemiesInCurrentWave);
+        EnemyKilled?.Invoke(_killedEnemies, _wave.EnemiesCount);
 
         enemy.Died -= OnEnemyDied;
     }
 
     private Enemy GetRandomEnemy()
     {
-        int enemyIndex = UnityEngine.Random.Range(0, _currentWave.Enemies.Length);
+        int enemyIndex = UnityEngine.Random.Range(0, _wave.Enemies.Length);
 
-        return _currentWave.Enemies[enemyIndex];
+        return _wave.Enemies[enemyIndex];
     }
 
     private IEnumerator LaunchWave()
@@ -121,13 +119,13 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SpawnEnemies()
     {
-        while (_spawnedEnemies < _currentWave.EnemiesCount)
+        while (_spawnedEnemies < _wave.EnemiesCount)
         {
             InstantiateEnemy();
 
             _spawnedEnemies++;
 
-            yield return Helpers.GetTime(_currentWave.SpawnRate);
+            yield return Helpers.GetTime(_wave.SpawnRate);
         }
 
         ResetWave();
@@ -137,11 +135,22 @@ public class Spawner : MonoBehaviour
     private class Wave
     {
         [SerializeField] private Enemy[] _enemies;
-        [SerializeField] private int _enemiesCount;
+        [SerializeField] private int _startEnemiesCount;
+        [SerializeField] private int _enemiesWaveMultiplier;
         [SerializeField] private float _spawnRate;
 
         public Enemy[] Enemies => _enemies;
-        public int EnemiesCount => _enemiesCount;
         public float SpawnRate => _spawnRate;
+        public int EnemiesCount { get; private set; }
+
+        public void SetDifficulty(int waveNumber)
+        {
+            EnemiesCount += waveNumber * _enemiesWaveMultiplier;
+        }
+
+        public void ResetToDefault()
+        {
+            EnemiesCount = _startEnemiesCount - _enemiesWaveMultiplier;
+        }
     }
 }

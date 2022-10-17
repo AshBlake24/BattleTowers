@@ -25,6 +25,8 @@ public class ObjectPool<T> where T : Component
 
         if (_container == null)
             _container = new GameObject($"Pool - {_prefab.name}").transform;
+
+        _container.SetParent(Helpers.GetGeneralPoolsContainer());
     }
 
     public void AddInstance(T instance)
