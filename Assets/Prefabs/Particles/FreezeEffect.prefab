@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6831674347452530724}
   - component: {fileID: 7572306748357295866}
   - component: {fileID: 223537461235320261}
+  - component: {fileID: 6235731323503687419}
   m_Layer: 0
   m_Name: FreezeEffect
   m_TagString: Untagged
@@ -43,7 +44,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4812,3 +4813,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6235731323503687419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6949196657421157357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c097185aaa5020b4183db941422cbae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

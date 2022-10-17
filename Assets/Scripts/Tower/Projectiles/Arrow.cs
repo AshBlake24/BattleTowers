@@ -8,6 +8,14 @@ public class Arrow : MonoBehaviour
 
     private Enemy _target;
 
+    public static ObjectPool<ParticleSystem> EffectPool { get; private set; }
+
+    private void OnEnable()
+    {
+        if (EffectPool == null)
+            EffectPool = new ObjectPool<ParticleSystem>(_impactEffect.gameObject);
+    }
+
     private void Update()
     {
         if (_target == null)
@@ -34,10 +42,13 @@ public class Arrow : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            Instantiate(_impactEffect, transform.position, transform.rotation);
+            ParticleSystem effect = EffectPool.GetInstance();
+            effect.gameObject.SetActive(true);
+            effect.transform.SetPositionAndRotation(transform.position, transform.rotation); 
+
             enemy.TakeDamage(_damage);
         }
 
-        Destroy(gameObject);
+        ArcheryTower.ArrowsPool.AddInstance(this);
     }
 }

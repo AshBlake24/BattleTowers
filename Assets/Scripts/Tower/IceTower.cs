@@ -8,8 +8,13 @@ public class IceTower : Tower
 
     private Collider[] _colliders;
 
+    public static ObjectPool<ParticleSystem> EffectPool { get; private set; }
+
     private void OnEnable()
     {
+        if (EffectPool == null)
+            EffectPool = new ObjectPool<ParticleSystem>(_iceRingEffect.gameObject);
+
         InvokeRepeating(CheckTargetsMethod, 0, 1 / UpdateTargetsPerFrame);
     }
 
@@ -35,10 +40,15 @@ public class IceTower : Tower
 
     protected override void Shot()
     {
-        Instantiate(_iceRingEffect, FirePoint.position, Quaternion.identity);
+        ParticleSystem effect = EffectPool.GetInstance();
+        effect.gameObject.SetActive(true);
+        effect.transform.SetPositionAndRotation(FirePoint.position, Quaternion.identity);
 
         foreach (var collider in _colliders)
         {
+            if (collider == null)
+                continue;
+
             if (collider.gameObject.TryGetComponent(out Enemy enemy))
             {
                 enemy.Freeze(_freezingTime);

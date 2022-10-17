@@ -10,7 +10,7 @@ public class EnemyHealthBar : Bar
 
     private void Start()
     {
-        _camera = Camera.main;
+        _camera = Helpers.Camera;
         _canvas = GetComponent<Canvas>();
 
         _canvas.worldCamera = _camera;

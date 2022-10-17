@@ -14,8 +14,13 @@ public class CannonTower : AttackTower
     private Vector3 _directionInAxisXZ;
     private Vector3 _firePointRotationOffset;
 
+    public static ObjectPool<Cannonball> CannonballsPool { get; private set; }
+
     private void OnEnable() 
     {
+        if (CannonballsPool == null)
+            CannonballsPool = new ObjectPool<Cannonball>(_cannonball.gameObject);
+
         _firePointRotationOffset = FirePoint.transform.eulerAngles;
 
         FirePoint.localEulerAngles = new Vector3(-_angleInDegrees, 0f, 0f) + _firePointRotationOffset;
@@ -45,8 +50,9 @@ public class CannonTower : AttackTower
     {
         float speed = GetInitialSpeed();
 
-        Cannonball cannonball = Instantiate(_cannonball, FirePoint.position, Quaternion.identity);
-
+        Cannonball cannonball = CannonballsPool.GetInstance();
+        cannonball.gameObject.SetActive(true);
+        cannonball.transform.SetLocalPositionAndRotation(FirePoint.position, Quaternion.identity);
         cannonball.Init(EnemiesLayerMask);
 
         cannonball.GetComponent<Rigidbody>().velocity = FirePoint.forward * speed;

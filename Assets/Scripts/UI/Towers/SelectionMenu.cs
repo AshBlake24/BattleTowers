@@ -29,7 +29,7 @@ public class SelectionMenu : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Helpers.Camera.ScreenPointToRay(Input.mousePosition);
 
             TryOpenSelectionMenu(ray);
         }
@@ -105,7 +105,7 @@ public class SelectionMenu : MonoBehaviour
                 {
                     CloseSelectorMenu();
 
-                    _towerMenu.transform.position = Camera.main.WorldToScreenPoint(towerPlace.transform.position);
+                    _towerMenu.transform.position = Helpers.Camera.WorldToScreenPoint(towerPlace.transform.position);
 
                     OpenTowerMenu(towerPlace);
                 }

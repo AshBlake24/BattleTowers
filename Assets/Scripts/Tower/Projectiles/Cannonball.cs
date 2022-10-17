@@ -9,6 +9,14 @@ public class Cannonball : MonoBehaviour
 
     private LayerMask _enemiesLayerMask;
 
+    public static ObjectPool<ParticleSystem> EffectPool { get; private set; }
+
+    private void OnEnable()
+    {
+        if (EffectPool == null)
+            EffectPool = new ObjectPool<ParticleSystem>(_explosionEffect.gameObject);
+    }
+
     public void Init(LayerMask layerMask)
     {
         _enemiesLayerMask = layerMask;
@@ -16,11 +24,13 @@ public class Cannonball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Instantiate(_explosionEffect, transform.position, transform.rotation);
+        ParticleSystem effect = EffectPool.GetInstance();
+        effect.gameObject.SetActive(true);
+        effect.transform.SetPositionAndRotation(transform.position, transform.rotation);
 
         Explode();
 
-        Destroy(gameObject);
+        CannonTower.CannonballsPool.AddInstance(this);
     }
 
     private void Explode()

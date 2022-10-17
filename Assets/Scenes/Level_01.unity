@@ -1183,8 +1183,9 @@ MonoBehaviour:
   _waves:
   - _enemies:
     - {fileID: 2521105978829538956, guid: 81796293d4b01664eae74e0a10a0952c, type: 3}
-    _enemiesCount: 5
-    _spawnRate: 1
+    - {fileID: 6706615359397696996, guid: b8679efb96921074d821191ba5ff5723, type: 3}
+    _enemiesCount: 500
+    _spawnRate: 0.1
   _spawnPoint: {fileID: 277063569}
   _startWaypoint: {fileID: 803916928}
   _player: {fileID: 266402646}
