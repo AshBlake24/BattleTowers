@@ -1,21 +1,24 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenu : Screen
 {
-    [SerializeField] private Button _pauseMenu;
+    [SerializeField] private Player _player;
+    [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _resumeButton;
     [SerializeField] private Button _restartButton;
-    [SerializeField] private Button _menuButton;
+    [SerializeField] private Button _homeButton;
+    [SerializeField] private TMP_Text _score;
 
     private void OnEnable()
     {
-        _pauseMenu.onClick.AddListener(OnPauseButtonClick);
+        _pauseButton.onClick.AddListener(OnPauseButtonClick);
         _resumeButton.onClick.AddListener(OnResumeButtonClick);
         _restartButton.onClick.AddListener(OnRestartButtonClick);
-        _menuButton.onClick.AddListener(OnMenuButtonClick);
+        _homeButton.onClick.AddListener(OnMenuButtonClick);
     }
 
     protected override void Awake()
@@ -27,15 +30,17 @@ public class PauseMenu : Screen
 
     private void OnDisable()
     {
-        _pauseMenu.onClick.RemoveListener(OnPauseButtonClick);
+        _pauseButton.onClick.RemoveListener(OnPauseButtonClick);
         _resumeButton.onClick.RemoveListener(OnResumeButtonClick);
         _restartButton.onClick.RemoveListener(OnRestartButtonClick);
-        _menuButton.onClick.RemoveListener(OnMenuButtonClick);
+        _homeButton.onClick.RemoveListener(OnMenuButtonClick);
     }
 
     protected override void Open()
     {
         base.Open();
+
+        _score.text = _player.Score.ToString();
 
         Time.timeScale = 0;
     }

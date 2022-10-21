@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -21,8 +20,6 @@ public class Spawner : MonoBehaviour
     public event Action<float> WaveStarted;
     public event Action WaveCleared;
 
-    public static Dictionary<EnemyType, ObjectPool<Enemy>> _enemiesPool;
-
     private int _currentWaveNumber;
     private int _spawnedEnemies;
     private int _killedEnemies;
@@ -30,12 +27,6 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        if (_enemiesPool == null)
-        {
-            _enemiesPool = new Dictionary<EnemyType, ObjectPool<Enemy>>();
-            InitializePool();
-        }
-
         _currentWaveNumber = 1;
         _wave.ResetToDefault();
         SetWave();
@@ -79,26 +70,9 @@ public class Spawner : MonoBehaviour
         _spawnedEnemies = 0;
     }
 
-    private void InitializePool()
-    {
-        Enemy[] enemies = _wave.Enemies;
-
-        foreach (Enemy enemy in enemies)
-        {
-            if (_enemiesPool.ContainsKey(enemy.Type))
-                continue;
-
-            _enemiesPool.Add(enemy.Type, new ObjectPool<Enemy>(enemy.gameObject));
-        }
-    }
-
     private void InstantiateEnemy()
     {
-        //Enemy enemy = Instantiate(GetRandomEnemy(), _spawnPoint);
-
-        Enemy enemy = _enemiesPool[GetRandomEnemy()].GetInstance();
-        enemy.gameObject.SetActive(true);
-        enemy.transform.SetPositionAndRotation(_spawnPoint.position, _spawnPoint.rotation);
+        Enemy enemy = Instantiate(GetRandomEnemy(), _spawnPoint);
 
         if (enemy.TryGetComponent(out WaypointFollower follower))
             follower.Init(_startWaypoint);
@@ -122,21 +96,14 @@ public class Spawner : MonoBehaviour
 
         EnemyKilled?.Invoke(_killedEnemies, _wave.EnemiesCount);
 
-        _enemiesPool[enemy.Type].AddInstance(enemy);
-
         enemy.Died -= OnEnemyDied;
     }
 
-    private EnemyType GetRandomEnemy()
+    private Enemy GetRandomEnemy()
     {
-        return (EnemyType)UnityEngine.Random.Range(0, _enemiesPool.Count);
+        int enemyIndex = UnityEngine.Random.Range(0, _wave.Enemies.Length);
+        return _wave.Enemies[enemyIndex];
     }
-
-    //private Enemy GetRandomEnemy()
-    //{
-    //    int enemyIndex = UnityEngine.Random.Range(0, _wave.Enemies.Length);
-    //    return _wave.Enemies[enemyIndex];
-    //}
 
     private IEnumerator LaunchWave()
     {

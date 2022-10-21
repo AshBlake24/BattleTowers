@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class TowerMenu : MonoBehaviour
 {
-    [SerializeField] private Button _upgradeButton;
     [SerializeField] private Button _sellButton;
 
     public event Action ButtonClick;
