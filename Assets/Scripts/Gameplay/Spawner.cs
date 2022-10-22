@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [Header("Wave Settings")]
-    [SerializeField] private Wave _wave;
-
     [Header("Spawner Settings")]
-    [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private Waypoint _startWaypoint;
+    [SerializeField] private Wave _wave;
+    [SerializeField] private SpawnPoint[] _spawnPoints;
     [SerializeField] private float _delayBeforeWave;
 
     [Header("Target Settings")]
@@ -72,10 +69,11 @@ public class Spawner : MonoBehaviour
 
     private void InstantiateEnemy()
     {
-        Enemy enemy = Instantiate(GetRandomEnemy(), _spawnPoint);
+        SpawnPoint spawnPoint = GetRandomSpawnPoint();
+        Enemy enemy = Instantiate(GetRandomEnemy(), spawnPoint.transform);
 
         if (enemy.TryGetComponent(out WaypointFollower follower))
-            follower.Init(_startWaypoint);
+            follower.Init(spawnPoint.StartWaypoint);
 
         var enemyHealthBar = enemy.GetComponentInChildren<EnemyHealthBar>();
 
@@ -105,9 +103,16 @@ public class Spawner : MonoBehaviour
         return _wave.Enemies[enemyIndex];
     }
 
+    private SpawnPoint GetRandomSpawnPoint()
+    {
+        int spawnIndex = UnityEngine.Random.Range(0, _spawnPoints.Length);
+        return _spawnPoints[spawnIndex];
+    }
+
     private IEnumerator LaunchWave()
     {
         WaveStarted?.Invoke(_delayBeforeWave);
+        EnemyKilled?.Invoke(_killedEnemies, _wave.EnemiesCount);
 
         yield return Helpers.GetTime(_delayBeforeWave);
 
@@ -131,13 +136,16 @@ public class Spawner : MonoBehaviour
     [Serializable]
     private class Wave
     {
+        [Header("Wave Settings")]
         [SerializeField] private Enemy[] _enemies;
         [SerializeField] private int _startEnemiesCount;
         [SerializeField] private int _enemiesWaveMultiplier;
-        [SerializeField] private float _spawnRate;
+
+        [Header("Spawn Rate Settings")]
+        [SerializeField] private float[] _spawnRates;
 
         public Enemy[] Enemies => GetEnemies();
-        public float SpawnRate => _spawnRate;
+        public float SpawnRate => GetSpawnRate();
         public int EnemiesCount { get; private set; }
 
         public void SetDifficulty(int waveNumber)
@@ -148,6 +156,12 @@ public class Spawner : MonoBehaviour
         public void ResetToDefault()
         {
             EnemiesCount = _startEnemiesCount - _enemiesWaveMultiplier;
+        }
+
+        public float GetSpawnRate()
+        {
+            int timeIndex = UnityEngine.Random.Range(0, _spawnRates.Length);
+            return _spawnRates[timeIndex];
         }
 
         private Enemy[] GetEnemies()

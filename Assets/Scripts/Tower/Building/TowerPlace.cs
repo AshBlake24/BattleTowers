@@ -29,7 +29,7 @@ public class TowerPlace : MonoBehaviour
 
         DeactivatePlaceholder();
 
-        _tower = Instantiate(tower, transform.position, Quaternion.identity, transform);
+        _tower = Instantiate(tower, transform.position, transform.rotation, transform);
     }
 
     private void ActivatePlaceholder() 

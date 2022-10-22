@@ -94,14 +94,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98fe97a7c9b58604582a6c4054aa2311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 0
-  _sellPrice: 0
+  _price: 300
+  _sellPrice: 150
   EnemiesLayerMask:
     serializedVersion: 2
     m_Bits: 256
   FirePoint: {fileID: 5052040553526783517}
   FiringRate: 1.5
-  FireRange: 2
+  FireRange: 1.5
   _iceRingEffect: {fileID: 9150993735360083344, guid: 4f9fdbe8368b6394495025445d2b92d7, type: 3}
   _freezingTime: 2
 --- !u!4 &5052040553526783517 stripped

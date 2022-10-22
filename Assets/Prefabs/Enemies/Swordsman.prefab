@@ -230,8 +230,8 @@ MonoBehaviour:
   - {fileID: 1188367615723013978}
   - {fileID: 1988972003220849380}
   - {fileID: 6679805349108547509}
-  _speed: 1
-  _debuffSpeed: 0.6
+  _speed: 0.5
+  _debuffSpeed: 0.35
 --- !u!114 &1188367615723013978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 688a4094d8d32e64ba049f1bd4bbbabb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
+  _health: 75
   _reward: 30
   _score: 60
   _freezeEffect: {fileID: 7572306748357295866, guid: a1228cdd9316232478a1f11d02fdad19, type: 3}

@@ -94,15 +94,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0a9d7474b829e4584ddbdb6c7a7bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 0
-  _sellPrice: 0
+  _price: 150
+  _sellPrice: 75
   EnemiesLayerMask:
     serializedVersion: 2
     m_Bits: 256
   FirePoint: {fileID: 5754476984486348826}
   FiringRate: 1
-  FireRange: 2
-  _arrow: {fileID: 7780707097300720587, guid: af13b9bf6c70f8349bf1876b7b91004c, type: 3}
+  FireRange: 1.5
+  _arrow: {fileID: 8057273963774230780, guid: 5ed294e4c0ed9494fb9250f54ec6952f, type: 3}
 --- !u!4 &5754476984486348826 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2964669792395104144, guid: b248675b2edc5814d896b949feba6acf, type: 3}

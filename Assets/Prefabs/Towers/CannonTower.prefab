@@ -46,18 +46,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8693e6797a5cba34891d08c3b50e482c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 0
-  _sellPrice: 0
+  _price: 250
+  _sellPrice: 125
   EnemiesLayerMask:
     serializedVersion: 2
     m_Bits: 256
   FirePoint: {fileID: 6916859685351763760}
   FiringRate: 1
-  FireRange: 2
+  FireRange: 1.5
   _cannon: {fileID: 3336356363077795515}
   _angleInDegrees: 20
   _rotationSpeed: 750
-  _cannonball: {fileID: 5315841361308701955, guid: a6c6af7917485f546acfc1b6d1104d7e, type: 3}
+  _cannonball: {fileID: -4663806113016412549, guid: bddc6db7051b8fe45b22472883d1e781, type: 3}
+  _smokeEffect: {fileID: 3826700026245253629, guid: 06a92a25595648b4eb64a3e853cda6f7, type: 3}
+  _effectOffset: {x: 0, y: 0, z: 0.1}
 --- !u!1001 &3010558571803892048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3b2d166a0d81c244ca75def60b65786e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9795
+      value: 0.784
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3b2d166a0d81c244ca75def60b65786e, type: 3}
       propertyPath: m_LocalPosition.z

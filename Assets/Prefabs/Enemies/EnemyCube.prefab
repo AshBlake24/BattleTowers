@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9154643463541306650}
   - component: {fileID: 9154643463541306086}
   - component: {fileID: 9154643463541306653}
+  - component: {fileID: 7791191305935330665}
   m_Layer: 8
   m_Name: EnemyCube
   m_TagString: Untagged
@@ -128,4 +129,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 1000000
-  _freezeEffectPrefab: {fileID: 7572306748357295866, guid: a1228cdd9316232478a1f11d02fdad19, type: 3}
+  _reward: 0
+  _score: 0
+  _freezeEffect: {fileID: 7572306748357295866, guid: a1228cdd9316232478a1f11d02fdad19, type: 3}
+  _type: 0
+--- !u!114 &7791191305935330665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9154643463541306652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9cf042bc7eb0d542b67fbc0c12d34b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startState: {fileID: 0}

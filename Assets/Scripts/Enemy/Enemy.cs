@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyStateMachine))]
+[RequireComponent(typeof(EnemyStateMachine), typeof(Collider))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ParticleSystem _freezeEffect;
     [SerializeField] private EnemyType _type;
 
+    private Collider _collider;
     private Coroutine _freezeEffectCoroutine;
     private ParticleSystem _currentFreezeEffect;
     private EnemyStateMachine _stateMachine;
@@ -30,20 +31,26 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_collider == null)
+            _collider = GetComponent<Collider>();
+
         if (_stateMachine == null)
             _stateMachine = GetComponent<EnemyStateMachine>();
 
         if (FreezeEffectPool == null)
             FreezeEffectPool = new ObjectPool<ParticleSystem>(_freezeEffect.gameObject);
 
+        _currentHealth = _health;
+
         IsAlive = true;
         IsFreezing = false;
+        _collider.enabled = true;
     }
 
     public void Init(Gates target)
     {
-        Target = target;
-        _currentHealth = _health;
+        Target = target;     
+        
         HealthChanged.Invoke(_currentHealth, _health);
 
         _stateMachine.Init(this);
@@ -59,6 +66,7 @@ public class Enemy : MonoBehaviour
         {
             IsAlive = false;
             Died?.Invoke(this);
+            _collider.enabled = false;
         }
     }
 

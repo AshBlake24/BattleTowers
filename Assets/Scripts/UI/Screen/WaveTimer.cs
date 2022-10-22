@@ -20,6 +20,16 @@ public class WaveTimer : Screen
         _spawner.WaveStarted -= OnWaveStarted;
     }
 
+    protected override void Open()
+    {
+        CanvasGroup.alpha = 1.0f;
+    }
+
+    protected override void Close()
+    {
+        CanvasGroup.alpha = 0f;
+    }
+
     private void ChangeTime(float time)
     {
         _timer.text = string.Format("New wave in {0:0}...", time + OneSecond);

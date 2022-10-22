@@ -10,18 +10,28 @@ public class CannonTower : AttackTower
     [SerializeField] private float _rotationSpeed = 250;
     [SerializeField] private Cannonball _cannonball;
 
+    [Header("Effect Settings")]
+    [SerializeField] private ParticleSystem _smokeEffect;
+    [SerializeField] private Vector3 _effectOffset;
+
     private Vector3 _directionToTarget;
     private Vector3 _directionInAxisXZ;
     private Vector3 _firePointRotationOffset;
+    private Quaternion _cannonRotationOffset;
 
     public static ObjectPool<Cannonball> CannonballsPool { get; private set; }
+    public static ObjectPool<ParticleSystem> EffectPool { get; private set; }
 
     private void OnEnable() 
     {
         if (CannonballsPool == null)
             CannonballsPool = new ObjectPool<Cannonball>(_cannonball.gameObject);
 
+        if (EffectPool == null)
+            EffectPool = new ObjectPool<ParticleSystem>(_smokeEffect.gameObject);
+
         _firePointRotationOffset = FirePoint.transform.eulerAngles;
+        _cannonRotationOffset = _cannon.rotation;
 
         FirePoint.localEulerAngles = new Vector3(-_angleInDegrees, 0f, 0f) + _firePointRotationOffset;
         InvokeRepeating(CheckTargetsMethod, 0, 1 / UpdateTargetsPerFrame);
@@ -48,6 +58,10 @@ public class CannonTower : AttackTower
 
     protected override void Shot()
     {
+        ParticleSystem effect = EffectPool.GetInstance();
+        effect.gameObject.SetActive(true);
+        effect.transform.SetPositionAndRotation(FirePoint.position + _effectOffset, FirePoint.rotation);
+
         float speed = GetInitialSpeed();
 
         Cannonball cannonball = CannonballsPool.GetInstance();
@@ -68,7 +82,7 @@ public class CannonTower : AttackTower
     {
         Quaternion lookRotation = Quaternion.LookRotation(_directionInAxisXZ, Vector3.up);
 
-        _cannon.rotation = Quaternion.RotateTowards(_cannon.rotation, lookRotation, _rotationSpeed * Time.deltaTime);
+        _cannon.rotation = Quaternion.RotateTowards(_cannon.rotation, lookRotation * _cannonRotationOffset, _rotationSpeed * Time.deltaTime);
     }
 
     private float GetInitialSpeed()
