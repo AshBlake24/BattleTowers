@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Enemy))]
@@ -5,6 +6,8 @@ public class WaypointFollower : MonoBehaviour
 {
     private Waypoint _previousWaypoint;
     private Waypoint _nextWaypoint;
+
+    public event Action<Waypoint> WaypointReached;
 
     public Waypoint CurrentWaypoint { get; private set; }
 
@@ -14,7 +17,10 @@ public class WaypointFollower : MonoBehaviour
             return;
 
         if (transform.position == CurrentWaypoint.transform.position)
+        {
+            WaypointReached?.Invoke(CurrentWaypoint);
             SetNextWaypoint();
+        }
     }
 
     public void Init(Waypoint startWaypoint)

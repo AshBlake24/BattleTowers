@@ -1,23 +1,21 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Gates _playerGate;
+    [SerializeField] private Player _player;
     [SerializeField] private Heart _heartTemplate;
 
     private List<Heart> _hearts = new List<Heart>();
 
     private void OnEnable()
     {
-        _playerGate.HealthChanged += OnHealthChanged;
+        _player.HealthChanged += OnHealthChanged;
     }
 
     private void OnDisable()
     {
-        _playerGate.HealthChanged -= OnHealthChanged;
+        _player.HealthChanged -= OnHealthChanged;
     }
 
     private void OnHealthChanged(int health)

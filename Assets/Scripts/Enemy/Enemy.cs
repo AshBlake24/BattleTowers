@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
 
     public static ObjectPool<ParticleSystem> FreezeEffectPool { get; private set; }
 
-    public Gates Target { get; private set; }
     public bool IsAlive { get; private set; }
     public bool IsFreezing { get; private set; }
     public int Reward => _reward;
@@ -47,13 +46,11 @@ public class Enemy : MonoBehaviour
         _collider.enabled = true;
     }
 
-    public void Init(Gates target)
+    public void Init(Player player)
     {
-        Target = target;     
-        
         HealthChanged.Invoke(_currentHealth, _health);
 
-        _stateMachine.Init(this);
+        _stateMachine.Init(player, this);
     }
 
     public void TakeDamage(int damage)

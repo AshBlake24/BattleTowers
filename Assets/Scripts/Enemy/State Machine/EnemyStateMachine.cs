@@ -6,8 +6,8 @@ public class EnemyStateMachine : MonoBehaviour
     [SerializeField] private State _startState;
 
     private Enemy _self;
+    private Player _player;
     private State _currentState;
-    private Gates _target;
 
     private State[] _states;
     private Transition[] _transitions;
@@ -42,7 +42,7 @@ public class EnemyStateMachine : MonoBehaviour
         }
     }
 
-    public void Init(Enemy enemy)
+    public void Init(Player player, Enemy enemy)
     {
         if (_states == null)
             _states = GetComponents<State>();
@@ -51,7 +51,7 @@ public class EnemyStateMachine : MonoBehaviour
             _transitions = GetComponents<Transition>();
 
         _self = enemy;
-        _target = _self.Target;
+        _player = player;
         _currentState = null;
 
         Reset(_startState);
@@ -70,6 +70,6 @@ public class EnemyStateMachine : MonoBehaviour
         _currentState = state;
 
         if (_currentState != null)
-            _currentState.Enter(_target, _self);
+            _currentState.Enter(_player, _self);
     }
 }

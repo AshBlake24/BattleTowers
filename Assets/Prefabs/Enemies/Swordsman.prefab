@@ -229,7 +229,7 @@ MonoBehaviour:
   _transitions:
   - {fileID: 1188367615723013978}
   - {fileID: 1988972003220849380}
-  - {fileID: 6679805349108547509}
+  - {fileID: 8962408003133750620}
   _speed: 0.5
   _debuffSpeed: 0.35
 --- !u!114 &1188367615723013978
@@ -244,9 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566a109eb17927748a8fadbd7b5cc997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetState: {fileID: 3373760167896633816}
-  _distanceToTarget: 0.65
-  _spreadDistance: 0.1
+  _targetState: {fileID: 3990653220531376236}
 --- !u!114 &1988972003220849380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,23 +258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 3990653220531376236}
---- !u!114 &3373760167896633816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6624566915950718615}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7818c5755469240448175788b0b455a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _transitions:
-  - {fileID: 1988972003220849380}
-  - {fileID: 6679805349108547509}
-  _damage: 1
-  _attackRate: 1
 --- !u!114 &3990653220531376236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,19 +310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitions: []
---- !u!114 &6679805349108547509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6624566915950718615}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0911a27428f0014f81f4c46b8668c82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetState: {fileID: 6073601281227345099}
 --- !u!114 &6706615359397696996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,3 +327,16 @@ MonoBehaviour:
   _score: 60
   _freezeEffect: {fileID: 7572306748357295866, guid: a1228cdd9316232478a1f11d02fdad19, type: 3}
   _type: 1
+--- !u!114 &8962408003133750620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6624566915950718615}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef334c773db4a541937a865963a9e98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetState: {fileID: 6073601281227345099}

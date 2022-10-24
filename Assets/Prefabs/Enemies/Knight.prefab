@@ -128,10 +128,10 @@ MonoBehaviour:
   _transitions:
   - {fileID: 6777031887979901346}
   - {fileID: 4792937671392279607}
-  - {fileID: 4042576670508272348}
+  - {fileID: 1693972320241737365}
   _speed: 0.5
   _debuffSpeed: 0.35
---- !u!114 &1864573263628296029
+--- !u!114 &1693972320241737365
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,14 +140,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3403290902836686173}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7818c5755469240448175788b0b455a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ef334c773db4a541937a865963a9e98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transitions:
-  - {fileID: 4792937671392279607}
-  - {fileID: 4042576670508272348}
-  _damage: 1
-  _attackRate: 1
+  _targetState: {fileID: 7986788446034035064}
 --- !u!114 &2521105978829538956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,19 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393af1543dd511a4c93d9eb6b25ec9e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4042576670508272348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3403290902836686173}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0911a27428f0014f81f4c46b8668c82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetState: {fileID: 7986788446034035064}
 --- !u!114 &4792937671392279607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,9 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566a109eb17927748a8fadbd7b5cc997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetState: {fileID: 1864573263628296029}
-  _distanceToTarget: 0.65
-  _spreadDistance: 0.1
+  _targetState: {fileID: 6167313086028255822}
 --- !u!114 &7986788446034035064
 MonoBehaviour:
   m_ObjectHideFlags: 0

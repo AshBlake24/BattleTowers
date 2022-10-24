@@ -4,6 +4,9 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
     [SerializeField] private List<Waypoint> _nextWaypoints;
+    [SerializeField] private bool _isEndPoint;
+
+    public bool IsEndPoint => _isEndPoint;
 
     public Waypoint GetNextWaypoint()
     {

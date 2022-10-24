@@ -4,14 +4,14 @@ public abstract class Transition : MonoBehaviour
 {
     [SerializeField] private State _targetState;
 
-    public State TargetState => _targetState;
     public bool ReadyToTransition { get; protected set; }
-    protected Gates Target { get; private set; }
     protected Enemy Self { get; private set; }
+    protected Player Player { get; private set; }
+    public State TargetState => _targetState;
 
-    public void Init(Gates target, Enemy self)
+    public void Init(Player player, Enemy self)
     {
-        Target = target;
+        Player = player;
         Self = self;
     }
 

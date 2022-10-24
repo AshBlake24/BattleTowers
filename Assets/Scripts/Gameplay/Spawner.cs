@@ -11,7 +11,6 @@ public class Spawner : MonoBehaviour
 
     [Header("Target Settings")]
     [SerializeField] private Player _player;
-    [SerializeField] private Gates _target;
 
     public event Action<int, int> EnemyKilled;
     public event Action<float> WaveStarted;
@@ -31,7 +30,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        if (_target.IsDestroyed)
+        if (_player.IsAlive == false)
         {
             if (_spawnEnemies != null)
             {
@@ -80,7 +79,7 @@ public class Spawner : MonoBehaviour
         if (enemyHealthBar != null)
             enemyHealthBar.Init(enemy);
 
-        enemy.Init(_target);
+        enemy.Init(_player);
 
         enemy.Died += OnEnemyDied;
     }

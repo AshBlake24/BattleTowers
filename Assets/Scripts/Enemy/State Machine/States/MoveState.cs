@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator), typeof(WaypointFollower))]
@@ -32,11 +33,10 @@ public class MoveState : State
 
     private void Update()
     {
-        if (_follower.CurrentWaypoint != null)
-            _target = _follower.CurrentWaypoint.transform;
-        else
-            _target = Target.transform;
+        if (_follower.CurrentWaypoint == null)
+            return;
 
+        _target = _follower.CurrentWaypoint.transform;
         _direction = _target.position - transform.position;
 
         Move();

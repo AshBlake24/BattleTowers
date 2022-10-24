@@ -8,7 +8,6 @@ public static class AnimatorEnemyController
 
     public static class Triggers
     {
-        public const string Attack = "Attack";
         public const string Die = "Die";
     }
 }

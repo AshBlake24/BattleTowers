@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cannonball
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 85916170708324f4b97fb6267f326bf6, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85916170708324f4b97fb6267f326bf6, type: 3}
 --- !u!1 &4987682782125050413 stripped

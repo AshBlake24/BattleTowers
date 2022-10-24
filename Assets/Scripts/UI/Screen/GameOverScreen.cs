@@ -8,7 +8,6 @@ using TMPro;
 [RequireComponent(typeof(CanvasGroup))]
 public class GameOverScreen : Screen
 {
-    [SerializeField] private Gates _gates;
     [SerializeField] private Player _player;
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _homeButton;
@@ -17,7 +16,7 @@ public class GameOverScreen : Screen
 
     private void OnEnable()
     {
-        _gates.Destroyed += OnGatesDestroyed;
+        _player.Died += OnDied;
         _restartButton.onClick.AddListener(RestartLevel);
         _homeButton.onClick.AddListener(LoadMenu);
     }
@@ -31,7 +30,7 @@ public class GameOverScreen : Screen
 
     private void OnDisable()
     {
-        _gates.Destroyed -= OnGatesDestroyed;
+        _player.Died -= OnDied;
         _restartButton.onClick.RemoveListener(RestartLevel);
         _homeButton.onClick.RemoveListener(LoadMenu);
     }
@@ -53,12 +52,12 @@ public class GameOverScreen : Screen
         throw new NotImplementedException();
     }
 
-    private void OnGatesDestroyed()
+    private void OnDied()
     {
-        StartCoroutine(DelayEnable());
+        StartCoroutine(EnableWithDelay());
     }
 
-    private IEnumerator DelayEnable()
+    private IEnumerator EnableWithDelay()
     {
         yield return Helpers.GetTime(_delayBeforeScreen);
 
