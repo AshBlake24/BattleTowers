@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +12,7 @@ public class GameOverScreen : Screen
     [SerializeField] private Button _homeButton;
     [SerializeField] private TMP_Text _score;
     [SerializeField] private float _delayBeforeScreen;
+    [SerializeField] private string _mainMenuSceneName;
 
     private void OnEnable()
     {
@@ -49,7 +49,7 @@ public class GameOverScreen : Screen
 
     private void LoadMenu()
     {
-        throw new NotImplementedException();
+        SceneManager.LoadScene(_mainMenuSceneName);
     }
 
     private void OnDied()

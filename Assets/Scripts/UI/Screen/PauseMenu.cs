@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +11,7 @@ public class PauseMenu : Screen
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _homeButton;
     [SerializeField] private TMP_Text _score;
+    [SerializeField] private string _mainMenuSceneName;
 
     private void OnEnable()
     {
@@ -63,6 +63,6 @@ public class PauseMenu : Screen
 
     private void OnMenuButtonClick()
     {
-        throw new NotImplementedException();
+        SceneManager.LoadScene(_mainMenuSceneName);
     }
 }
