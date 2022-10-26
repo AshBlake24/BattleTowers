@@ -8,7 +8,6 @@ public class SelectionMenu : MonoBehaviour
 {
     private const float OpenSize = 1;
     private const float CloseSize = 0;
-    private const float RaycastDistance = 200;
 
     [SerializeField] private Player _player;
     [SerializeField] private TowerMenu _towerMenu;
@@ -16,6 +15,7 @@ public class SelectionMenu : MonoBehaviour
     [SerializeField] private List<TowerViewer> _towerViewers;
     [SerializeField] private float _openDuration;
     [SerializeField] private float _closeDuration;
+    [SerializeField] private float _raycastDistance;
 
     private void OnEnable()
     {
@@ -27,9 +27,9 @@ public class SelectionMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
+        if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject() == false)
         {
-            Ray ray = Helpers.Camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Helpers.Camera.ScreenPointToRay(Input.touches[0].position);
 
             TryOpenSelectionMenu(ray);
         }
@@ -89,7 +89,7 @@ public class SelectionMenu : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, RaycastDistance))
+        if (Physics.Raycast(ray, out hit, _raycastDistance))
         {
             if (hit.collider.TryGetComponent(out TowerPlace towerPlace))
             {
@@ -97,7 +97,7 @@ public class SelectionMenu : MonoBehaviour
                 {
                     CloseTowerMenu();
 
-                    _selectorMenu.transform.position = Input.mousePosition;
+                    _selectorMenu.transform.position = Input.touches[0].position;
 
                     OpenSelectorMenu(towerPlace);
                 }
