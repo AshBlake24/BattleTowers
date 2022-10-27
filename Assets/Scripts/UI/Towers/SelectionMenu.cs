@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
 using UnityEngine;
 using DG.Tweening;
-using System;
 
 public class SelectionMenu : MonoBehaviour
 {
@@ -27,9 +25,9 @@ public class SelectionMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject() == false)
+        if (Input.GetMouseButtonDown(0) && Helpers.IsOverUI() == false)
         {
-            Ray ray = Helpers.Camera.ScreenPointToRay(Input.touches[0].position);
+            Ray ray = Helpers.Camera.ScreenPointToRay(Input.mousePosition);
 
             TryOpenSelectionMenu(ray);
         }
@@ -97,7 +95,7 @@ public class SelectionMenu : MonoBehaviour
                 {
                     CloseTowerMenu();
 
-                    _selectorMenu.transform.position = Input.touches[0].position;
+                    _selectorMenu.transform.position = Input.mousePosition;
 
                     OpenSelectorMenu(towerPlace);
                 }

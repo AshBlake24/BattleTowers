@@ -45,9 +45,9 @@ public class TowerBuilder : MonoBehaviour
         towerPlace.SetTower(tower);
     }
 
-    private void OnSellButtonClick(TowerPlace towerPlace, int money)
+    private void OnSellButtonClick(TowerPlace towerPlace)
     {
-        _player.AddMoney(money);
+        _player.AddMoney(towerPlace.Tower.SellPrice);
 
         towerPlace.Clear();
     }

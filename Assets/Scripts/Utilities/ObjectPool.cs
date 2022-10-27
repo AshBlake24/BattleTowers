@@ -10,16 +10,10 @@ public class ObjectPool<T> where T : Component
     public ObjectPool(GameObject prefab)
     {
         if (prefab == null)
-        {
-            Debug.Log("Prefab is null!");
             return;
-        }
 
         if (prefab.GetComponent<T>() == null)
-        {
-            Debug.Log($"Prefab has no: {typeof(T)} instanceComponent");
             return;
-        }
 
         _prefab = prefab;
 

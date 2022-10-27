@@ -63,6 +63,6 @@ public class PauseMenu : Screen
 
     private void OnMenuButtonClick()
     {
-        SceneManager.LoadScene(_mainMenuSceneName);
+        Time.timeScale = 1;
     }
 }

@@ -4892,3 +4892,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f5274397472fb4a8ad884805087bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particlesTexture: {fileID: 0}

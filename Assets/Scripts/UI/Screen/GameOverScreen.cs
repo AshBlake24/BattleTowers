@@ -9,7 +9,6 @@ public class GameOverScreen : Screen
 {
     [SerializeField] private Player _player;
     [SerializeField] private Button _restartButton;
-    [SerializeField] private Button _homeButton;
     [SerializeField] private TMP_Text _score;
     [SerializeField] private float _delayBeforeScreen;
     [SerializeField] private string _mainMenuSceneName;
@@ -18,7 +17,6 @@ public class GameOverScreen : Screen
     {
         _player.Died += OnDied;
         _restartButton.onClick.AddListener(RestartLevel);
-        _homeButton.onClick.AddListener(LoadMenu);
     }
 
     protected override void Awake()
@@ -32,7 +30,6 @@ public class GameOverScreen : Screen
     {
         _player.Died -= OnDied;
         _restartButton.onClick.RemoveListener(RestartLevel);
-        _homeButton.onClick.RemoveListener(LoadMenu);
     }
 
     protected override void Open()
@@ -45,11 +42,6 @@ public class GameOverScreen : Screen
     private void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    private void LoadMenu()
-    {
-        SceneManager.LoadScene(_mainMenuSceneName);
     }
 
     private void OnDied()

@@ -53,7 +53,7 @@ MonoBehaviour:
     m_Bits: 256
   FirePoint: {fileID: 6916859685351763760}
   FiringRate: 1
-  FireRange: 1.5
+  FireRange: 1.75
   _cannon: {fileID: 3336356363077795515}
   _angleInDegrees: 20
   _rotationSpeed: 750

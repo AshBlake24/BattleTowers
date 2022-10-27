@@ -23,7 +23,7 @@ SpriteAtlas:
     platformSettings:
     - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
-      m_MaxTextureSize: 2048
+      m_MaxTextureSize: 1024
       m_ResizeAlgorithm: 0
       m_TextureFormat: -1
       m_TextureCompression: 2
@@ -35,30 +35,25 @@ SpriteAtlas:
       m_ForceMaximumCompressionQuality_BC6H_BC7: 0
     packingSettings:
       serializedVersion: 2
-      padding: 4
+      padding: 8
       blockOffset: 1
       allowAlphaSplitting: 0
       enableRotation: 0
-      enableTightPacking: 1
+      enableTightPacking: 0
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
     - {fileID: 2800000, guid: 8494db57b363845f584fce6d99bed2df, type: 3}
-    - {fileID: 2800000, guid: c37f1105dbffd48e6b47cce36a0a06fc, type: 3}
-    - {fileID: 2800000, guid: 190942c48d42b4d7b8612e0c0acd7817, type: 3}
+    - {fileID: 2800000, guid: d40cda0d1575b44af81c6532bec4cebc, type: 3}
+    - {fileID: 2800000, guid: 90523fd09249fed4291cb5227e137ea0, type: 3}
     - {fileID: 2800000, guid: ff54a7fa593014e61afec778bfad0226, type: 3}
-    - {fileID: 2800000, guid: 40480d38a8a074a20824dd495db6c739, type: 3}
+    - {fileID: 2800000, guid: 13b2b392666aa4e439f3d5d38e320a37, type: 3}
     - {fileID: 2800000, guid: 32ca199eecf724a99af07cf9d499f468, type: 3}
     - {fileID: 2800000, guid: 930d59d8747814c02ada5351be3843eb, type: 3}
     - {fileID: 2800000, guid: 3f817542230674d21980e44d6fcb19eb, type: 3}
     - {fileID: 2800000, guid: 443de0802f84d43fd9d7ab49194f1548, type: 3}
     - {fileID: 2800000, guid: b1286ed66b2d34d139981e82f1faa2b2, type: 3}
-    - {fileID: 2800000, guid: 13b2b392666aa4e439f3d5d38e320a37, type: 3}
-    - {fileID: 2800000, guid: d40cda0d1575b44af81c6532bec4cebc, type: 3}
-    - {fileID: 2800000, guid: cc3c83ba2287c1b4ab01866e3b98285c, type: 3}
-    - {fileID: 2800000, guid: 722bf8ea9395ad0488f853393305780b, type: 3}
-    - {fileID: 2800000, guid: 90523fd09249fed4291cb5227e137ea0, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -68,14 +63,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 90523fd09249fed4291cb5227e137ea0, type: 3}
   - {fileID: 21300000, guid: 3f817542230674d21980e44d6fcb19eb, type: 3}
   - {fileID: 21300000, guid: 13b2b392666aa4e439f3d5d38e320a37, type: 3}
-  - {fileID: 21300000, guid: 190942c48d42b4d7b8612e0c0acd7817, type: 3}
-  - {fileID: 21300000, guid: c37f1105dbffd48e6b47cce36a0a06fc, type: 3}
   - {fileID: 21300000, guid: b1286ed66b2d34d139981e82f1faa2b2, type: 3}
   - {fileID: 21300000, guid: 8494db57b363845f584fce6d99bed2df, type: 3}
-  - {fileID: 21300000, guid: 40480d38a8a074a20824dd495db6c739, type: 3}
   - {fileID: 21300000, guid: 930d59d8747814c02ada5351be3843eb, type: 3}
-  - {fileID: 21300000, guid: cc3c83ba2287c1b4ab01866e3b98285c, type: 3}
-  - {fileID: 21300000, guid: 722bf8ea9395ad0488f853393305780b, type: 3}
   - {fileID: 21300000, guid: ff54a7fa593014e61afec778bfad0226, type: 3}
   - {fileID: 21300000, guid: d40cda0d1575b44af81c6532bec4cebc, type: 3}
   - {fileID: 21300000, guid: 32ca199eecf724a99af07cf9d499f468, type: 3}
@@ -84,14 +74,9 @@ SpriteAtlas:
   - circle_2
   - tabFlag_Green
   - button_5_Yellow
-  - panel_Light2
-  - panel_Dark
   - button_5_Green
   - label_Light3
-  - progress_Bar1Light
   - settings_SliderHandle
-  - box_login1
-  - box_option1
   - progress_Bar1FillYellow
   - button_5_Red
   - settings_Slider

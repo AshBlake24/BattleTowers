@@ -807,7 +807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 243695565}
   m_Layer: 0
-  m_Name: Sound
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -944,9 +944,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 254047717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 142908cb4a225d648b22989ad87f29e4, type: 3}
+  m_Script: {fileID: 11500000, guid: f8a4b35f55dde214ba0c52946b747c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mixer: {fileID: 24100000, guid: a1d4b142e6a78f849906eeea95adb85d, type: 2}
   _enabledSprite: {fileID: 420471118}
   _disabledSprite: {fileID: 108500354}
 --- !u!1 &268628058
@@ -3048,6 +3049,7 @@ GameObject:
   - component: {fileID: 995016529}
   - component: {fileID: 995016528}
   - component: {fileID: 995016527}
+  - component: {fileID: 995016530}
   m_Layer: 0
   m_Name: Play Button
   m_TagString: Untagged
@@ -3119,7 +3121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 995016528}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 995016530}
+        m_TargetAssemblyTypeName: ChangeSceneButton, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Level
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &995016528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3158,6 +3172,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995016525}
   m_CullTransparentMesh: 1
+--- !u!114 &995016530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995016525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11882d9d52b64214d86fe1f86d98a8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1011719172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3609,8 +3635,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d847e01f54182b247a2c8c362ad5fd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSceneName: Level
-  _playButton: {fileID: 995016527}
   _optionsButton: {fileID: 1618487748}
   _exitButton: {fileID: 1138628412}
 --- !u!225 &1248944471
@@ -5427,7 +5451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SOUND
+  m_text: MUSIC
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e15c15cfdfd37e8439e4ac33218e4dbd, type: 2}
   m_sharedMaterial: {fileID: 4977437873375058693, guid: e15c15cfdfd37e8439e4ac33218e4dbd, type: 2}

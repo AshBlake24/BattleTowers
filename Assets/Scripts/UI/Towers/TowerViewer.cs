@@ -11,10 +11,7 @@ public class TowerViewer : MonoBehaviour
     [SerializeField] private Sprite _towerInactiveIcon;
 
     [Header("Viewer Settings")]
-    [SerializeField] private Image _icon;
-    [SerializeField] private Image _frame;
-    [SerializeField] private Color _activeFrameColor;
-    [SerializeField] private Color _inactiveFrameColor;
+    [SerializeField] private Image _towerIcon;
 
     public event Action ButtonClick;
     public event Action<Tower, TowerPlace> ViewerClicked;
@@ -51,15 +48,13 @@ public class TowerViewer : MonoBehaviour
 
     private void ActivateViewer()
     {
-        _icon.sprite = _towerActiveIcon;
-        _frame.color = _activeFrameColor;
+        _towerIcon.sprite = _towerActiveIcon;
         _button.interactable = true;
     }
 
     private void DeactivateViewer()
     {
-        _icon.sprite = _towerInactiveIcon;
-        _frame.color = _inactiveFrameColor;
+        _towerIcon.sprite = _towerInactiveIcon;
         _button.interactable = false;
     }
 }

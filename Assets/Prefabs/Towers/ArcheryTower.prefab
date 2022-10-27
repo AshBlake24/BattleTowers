@@ -101,7 +101,7 @@ MonoBehaviour:
     m_Bits: 256
   FirePoint: {fileID: 5754476984486348826}
   FiringRate: 1
-  FireRange: 1.5
+  FireRange: 1.75
   _arrow: {fileID: 8057273963774230780, guid: 5ed294e4c0ed9494fb9250f54ec6952f, type: 3}
 --- !u!4 &5754476984486348826 stripped
 Transform:

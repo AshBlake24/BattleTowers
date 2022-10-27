@@ -382,6 +382,14 @@ PrefabInstance:
       propertyPath: _towerPrefab
       value: 
       objectReference: {fileID: 722015474166343596, guid: d2c4601e10ed47943ac0145ce6714a39, type: 3}
+    - target: {fileID: 445651861514680778, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
+      propertyPath: _towerActiveIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: a9100d7122c88424897bc9dac93e93bc, type: 3}
+    - target: {fileID: 445651861514680778, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
+      propertyPath: _towerInactiveIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 22aeb687006112e478b4b49c8596fd59, type: 3}
     - target: {fileID: 1125937275263299879, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2833,6 +2841,14 @@ PrefabInstance:
       propertyPath: _towerPrefab
       value: 
       objectReference: {fileID: 3572336368816907063, guid: b6c7ccd7a0d792f4ebd8f8be52b2ecfc, type: 3}
+    - target: {fileID: 445651861514680778, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
+      propertyPath: _towerActiveIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: e2f08540e6ac6d948b3157d4c24009b7, type: 3}
+    - target: {fileID: 445651861514680778, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
+      propertyPath: _towerInactiveIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 4d982c0a0ede8ee4ea0fac42d2771e22, type: 3}
     - target: {fileID: 1125937275263299879, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3848,17 +3864,17 @@ MonoBehaviour:
     _enemies:
     - {fileID: 2521105978829538956, guid: 81796293d4b01664eae74e0a10a0952c, type: 3}
     - {fileID: 6706615359397696996, guid: b8679efb96921074d821191ba5ff5723, type: 3}
-    _startEnemiesCount: 10
+    _startEnemiesCount: 4
     _enemiesWaveMultiplier: 1
     _spawnRates:
-    - 0.8
-    - 1
+    - 1.1
     - 1.3
     - 1.5
+    - 1.75
   _spawnPoints:
   - {fileID: 245628455}
   - {fileID: 516742178}
-  _delayBeforeWave: 1
+  _delayBeforeWave: 4
   _player: {fileID: 266402646}
 --- !u!1001 &280842143
 PrefabInstance:
@@ -4718,7 +4734,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338630722}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5980,6 +5996,14 @@ PrefabInstance:
       propertyPath: _towerPrefab
       value: 
       objectReference: {fileID: 3010558573140843123, guid: be6b1e84084bab1438e9735814af5b69, type: 3}
+    - target: {fileID: 445651861514680778, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
+      propertyPath: _towerActiveIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 8af77dc61f61e47419a174e913e12c3c, type: 3}
+    - target: {fileID: 445651861514680778, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
+      propertyPath: _towerInactiveIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 416905ba2da3d26409405499ba15b4f7, type: 3}
     - target: {fileID: 1125937275263299879, guid: 846a871cca28e3947aea11f9cdbc1147, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9239,6 +9263,7 @@ GameObject:
   - component: {fileID: 603412343}
   - component: {fileID: 603412342}
   - component: {fileID: 603412344}
+  - component: {fileID: 603412345}
   m_Layer: 5
   m_Name: Home Button
   m_TagString: Untagged
@@ -9348,7 +9373,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 603412342}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 603412345}
+        m_TargetAssemblyTypeName: ChangeSceneButton, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainMenu
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &603412345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603412340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11882d9d52b64214d86fe1f86d98a8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &606575957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11704,6 +11753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sellButton: {fileID: 1131852330}
+  _price: {fileID: 1750086951}
 --- !u!1001 &797426144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12991,7 +13041,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 266402646}
   _restartButton: {fileID: 325811183}
-  _homeButton: {fileID: 1575714910}
   _score: {fileID: 1226084966}
   _delayBeforeScreen: 2
   _mainMenuSceneName: MainMenu
@@ -23134,6 +23183,7 @@ GameObject:
   - component: {fileID: 1575714912}
   - component: {fileID: 1575714911}
   - component: {fileID: 1575714910}
+  - component: {fileID: 1575714913}
   m_Layer: 5
   m_Name: Home Button
   m_TagString: Untagged
@@ -23205,7 +23255,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1575714911}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1575714913}
+        m_TargetAssemblyTypeName: ChangeSceneButton, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainMenu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1575714911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23244,6 +23306,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575714908}
   m_CullTransparentMesh: 1
+--- !u!114 &1575714913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575714908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11882d9d52b64214d86fe1f86d98a8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1578515410
 PrefabInstance:
   m_ObjectHideFlags: 0
