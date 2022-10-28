@@ -7,13 +7,15 @@ public class SceneLoader : MonoBehaviour
 {
     public static SceneLoader Instance;
 
-    [SerializeField] private GameObject _loadingScreen;
-    [SerializeField] private Image _progressBar;
+    [SerializeField] private Canvas _loadingScreen;
+    [SerializeField] private Image _progressBarFiller;
     [SerializeField] private float _progressBarFillingSpeed = 3;
     [SerializeField] private int _progressBarUpdatePerSecond = 10;
     [SerializeField] private int _delayAfterSceneLoaded = 1;
+    [SerializeField] private BackroundMusicController _musicController;
 
     private float _fillingTarget;
+    private Scene _scene;
 
     private void Awake()
     {
@@ -28,16 +30,16 @@ public class SceneLoader : MonoBehaviour
 
     private void Update()
     {
-        _progressBar.fillAmount = Mathf.MoveTowards(_progressBar.fillAmount, _fillingTarget, _progressBarFillingSpeed * Time.deltaTime);
+        _progressBarFiller.fillAmount = Mathf.MoveTowards(_progressBarFiller.fillAmount, _fillingTarget, _progressBarFillingSpeed * Time.deltaTime);
     }
 
-    public async void LoadScene(string sceneName)
+    public async void LoadScene(string sceneName, bool loadWithDelay)
     {
         ResetProgressBar();
 
         var loadedScene = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
-        _loadingScreen.SetActive(true);
+        _loadingScreen.gameObject.SetActive(true);
 
         do
         {
@@ -46,17 +48,20 @@ public class SceneLoader : MonoBehaviour
         }
         while (loadedScene.progress < 1);
 
-        await Task.Delay(_delayAfterSceneLoaded);
+        if (loadWithDelay)
+            await Task.Delay(_delayAfterSceneLoaded);
 
-        _loadingScreen.SetActive(false);
+        _loadingScreen.gameObject.SetActive(false);
 
         SetLoadedSceneActive(sceneName);
+
+        _musicController.SetTrack(_scene.name);
     }
 
-    public void ChangeScene(string nextScene, string previousScene)
+    public void ChangeScene(string nextScene, string previousScene, bool loadWithDelay)
     {
         UnloadScene(previousScene);
-        LoadScene(nextScene);
+        LoadScene(nextScene, loadWithDelay);
     }
 
     private void UnloadScene(string sceneName)
@@ -66,13 +71,13 @@ public class SceneLoader : MonoBehaviour
 
     private void SetLoadedSceneActive(string sceneName)
     {
-        Scene scene = SceneManager.GetSceneByName(sceneName);
-        SceneManager.SetActiveScene(scene);
+        _scene = SceneManager.GetSceneByName(sceneName);
+        SceneManager.SetActiveScene(_scene);
     }
 
     private void ResetProgressBar()
     {
         _fillingTarget = 0;
-        _progressBar.fillAmount = 0;
+        _progressBarFiller.fillAmount = 0;
     }
 }

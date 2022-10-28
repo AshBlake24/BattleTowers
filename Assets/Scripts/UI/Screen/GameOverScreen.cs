@@ -11,7 +11,6 @@ public class GameOverScreen : Screen
     [SerializeField] private Button _restartButton;
     [SerializeField] private TMP_Text _score;
     [SerializeField] private float _delayBeforeScreen;
-    [SerializeField] private string _mainMenuSceneName;
 
     private void OnEnable()
     {
