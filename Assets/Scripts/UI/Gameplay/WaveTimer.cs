@@ -2,9 +2,8 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
-public class WaveTimer : Screen
+public class WaveTimer : MonoBehaviour
 {
-    private const string CloseMethod = "Close";
     private const int OneSecond = 1;
 
     [SerializeField] private Spawner _spawner;
@@ -20,27 +19,20 @@ public class WaveTimer : Screen
         _spawner.WaveStarted -= OnWaveStarted;
     }
 
-    protected override void Open()
-    {
-        CanvasGroup.alpha = 1.0f;
-    }
-
-    protected override void Close()
-    {
-        CanvasGroup.alpha = 0f;
-    }
-
     private void ChangeTime(float time)
     {
         _timer.text = string.Format("New wave in {0:0}...", time + OneSecond);
     }
 
-    private void OnWaveStarted(float time) => StartCoroutine(StartCountdown(time));
+    private void OnWaveStarted(float time)
+    {
+        _timer.gameObject.SetActive(true);
+
+        StartCoroutine(StartCountdown(time));
+    }
 
     private IEnumerator StartCountdown(float time)
     {
-        Open();
-
         while (time > 0)
         {
             ChangeTime(time);
@@ -52,6 +44,8 @@ public class WaveTimer : Screen
 
         ChangeTime(time);
 
-        Invoke(CloseMethod, OneSecond);
+        yield return Helpers.GetTime(OneSecond);
+
+        _timer.gameObject.SetActive(false);
     }
 }

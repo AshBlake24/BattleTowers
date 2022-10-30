@@ -1,3 +1,4 @@
+using TMPro;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,16 +13,19 @@ public class TowerViewer : MonoBehaviour
 
     [Header("Viewer Settings")]
     [SerializeField] private Image _towerIcon;
+    [SerializeField] private TMP_Text _price;
 
     public event Action ButtonClick;
     public event Action<Tower, TowerPlace> ViewerClicked;
     
     private Button _button;
     private TowerPlace _towerPlace;
+    private int _towerPrice;
 
     private void Awake()
     {
         _button = GetComponent<Button>();
+        _towerPrice = _towerPrefab.Price;
     }
 
     private void OnEnable() => _button.onClick.AddListener(OnButtonClick);
@@ -50,6 +54,7 @@ public class TowerViewer : MonoBehaviour
     {
         _towerIcon.sprite = _towerActiveIcon;
         _button.interactable = true;
+        _price.text = $"{_towerPrice} $";
     }
 
     private void DeactivateViewer()

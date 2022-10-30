@@ -17,13 +17,14 @@ public class Enemy : MonoBehaviour
     private EnemyStateMachine _stateMachine;
     private int _currentHealth;
 
-    public event Action<Enemy> Died;
+    public event Action<Enemy, bool> Died;
     public event Action<int, int> HealthChanged;
 
     public static ObjectPool<ParticleSystem> FreezeEffectPool { get; private set; }
 
     public bool IsAlive { get; private set; }
     public bool IsFreezing { get; private set; }
+    public bool KilledByPlayer { get; private set; }
     public int Reward => _reward;
     public int Score => _score;
     public EnemyType Type => _type;
@@ -61,9 +62,8 @@ public class Enemy : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            IsAlive = false;
-            Died?.Invoke(this);
-            _collider.enabled = false;
+            Die(true);
+            Died?.Invoke(this, KilledByPlayer);
         }
     }
 
@@ -73,6 +73,19 @@ public class Enemy : MonoBehaviour
             _freezeEffectCoroutine = StartCoroutine(FreezingCooldown(freezingTime));
         else
             RestartFreeze(freezingTime);
+    }
+
+    public void Die()
+    {
+        Die(false);
+        Died?.Invoke(this, KilledByPlayer);
+    }
+
+    private void Die(bool killedByPlayer)
+    {
+        _collider.enabled = false;
+        KilledByPlayer = killedByPlayer;
+        IsAlive = false;
     }
 
     private void RestartFreeze(float freezingTime)

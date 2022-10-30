@@ -23,9 +23,8 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        _currentWaveNumber = 1;
+        _currentWaveNumber = 0;
         _wave.ResetToDefault();
-        SetWave();
     }
 
     private void Update()
@@ -43,8 +42,13 @@ public class Spawner : MonoBehaviour
         {
             _killedEnemies = 0;
             WaveCleared?.Invoke();
-            SetNextWave();
         }
+    }
+
+    public void SetNextWave()
+    {
+        _currentWaveNumber++;
+        SetWave();
     }
 
     private void SetWave()
@@ -53,12 +57,6 @@ public class Spawner : MonoBehaviour
         _killedEnemies = 0;
 
         StartCoroutine(LaunchWave());
-    }
-
-    private void SetNextWave()
-    {
-        _currentWaveNumber++;
-        SetWave();
     }
 
     private void ResetWave()
@@ -84,12 +82,15 @@ public class Spawner : MonoBehaviour
         enemy.Died += OnEnemyDied;
     }
 
-    private void OnEnemyDied(Enemy enemy)
+    private void OnEnemyDied(Enemy enemy, bool killedByPlayer)
     {
         _killedEnemies++;
 
-        _player.AddMoney(enemy.Reward);
-        _player.AddScore(enemy.Score);
+        if (killedByPlayer)
+        {
+            _player.AddMoney(enemy.Reward);
+            _player.AddScore(enemy.Score);
+        }
 
         EnemyKilled?.Invoke(_killedEnemies, _wave.EnemiesCount);
 

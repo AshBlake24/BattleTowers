@@ -11,6 +11,6 @@ public class ApplicationStarter : MonoBehaviour
     {
         Application.targetFrameRate = _targetFrameRate;
         SceneLoader.Instance.LoadScene(_startScene, _loadWithDelay);
-        _musicController.SetVolume(_musicController.VolumeState);
+        _musicController.SetVolume(_musicController.PlayOnAwake);
     }
 }

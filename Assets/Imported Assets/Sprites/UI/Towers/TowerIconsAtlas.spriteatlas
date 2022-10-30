@@ -50,11 +50,13 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 416905ba2da3d26409405499ba15b4f7, type: 3}
     - {fileID: 2800000, guid: e2f08540e6ac6d948b3157d4c24009b7, type: 3}
     - {fileID: 2800000, guid: 4d982c0a0ede8ee4ea0fac42d2771e22, type: 3}
+    - {fileID: 2800000, guid: 0a50b7204c1ef044f8bcda6b4c790f04, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 0a50b7204c1ef044f8bcda6b4c790f04, type: 3}
   - {fileID: 21300000, guid: e2f08540e6ac6d948b3157d4c24009b7, type: 3}
   - {fileID: 21300000, guid: a9100d7122c88424897bc9dac93e93bc, type: 3}
   - {fileID: 21300000, guid: 8af77dc61f61e47419a174e913e12c3c, type: 3}
@@ -62,6 +64,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4d982c0a0ede8ee4ea0fac42d2771e22, type: 3}
   - {fileID: 21300000, guid: 416905ba2da3d26409405499ba15b4f7, type: 3}
   m_PackedSpriteNamesToIndex:
+  - button_4_Black
   - IceTower_Active
   - ArcheryTower_Active
   - CannonballTower_Active

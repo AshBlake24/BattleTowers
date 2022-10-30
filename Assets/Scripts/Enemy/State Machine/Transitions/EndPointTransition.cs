@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class EndPointTransition : Transition
 {
@@ -25,6 +26,7 @@ public class EndPointTransition : Transition
         {
             ReadyToTransition = true;
             Player.TakeDamage();
+            Self.Die();
         }
     }
 }
