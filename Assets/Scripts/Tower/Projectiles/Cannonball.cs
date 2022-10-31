@@ -10,6 +10,7 @@ public class Cannonball : MonoBehaviour
     private LayerMask _enemiesLayerMask;
 
     public static ObjectPool<ParticleSystem> EffectPool { get; private set; }
+    public int Damage => _damage;
 
     private void OnEnable()
     {

@@ -22,12 +22,17 @@ public class ArcheryTower : AttackTower
         if (Target == null || Target.IsAlive == false)
             return;
 
-        if (LastShootTime >= FiringRate)
+        if (LastShootTime >= 1f / AttackPerSecond)
         {
             Shot();
 
             LastShootTime = 0;
         }
+    }
+
+    public override int GetDamage()
+    {
+        return _arrow.Damage;
     }
 
     protected override void Shot()

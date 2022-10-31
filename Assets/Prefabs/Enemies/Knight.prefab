@@ -156,11 +156,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 688a4094d8d32e64ba049f1bd4bbbabb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: Knight
   _health: 100
   _reward: 50
   _score: 80
   _freezeEffect: {fileID: 7572306748357295866, guid: a1228cdd9316232478a1f11d02fdad19, type: 3}
   _type: 0
+  _enemyIcon: {fileID: 21300000, guid: ce1a7eda2de1182418ae1e0aa115f81a, type: 3}
+  _info: A slow knight in heavy armor
 --- !u!114 &3475465157192578886
 MonoBehaviour:
   m_ObjectHideFlags: 0

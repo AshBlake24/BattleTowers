@@ -94,13 +94,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0a9d7474b829e4584ddbdb6c7a7bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 150
+  _name: Archery Tower
+  _buyPrice: 150
   _sellPrice: 75
+  _towerIcon: {fileID: 21300000, guid: b51923f3d76301a49b5468030f185911, type: 3}
+  _info: deals damage to a single target
   EnemiesLayerMask:
     serializedVersion: 2
     m_Bits: 256
   FirePoint: {fileID: 5754476984486348826}
-  FiringRate: 1
+  AttackPerSecond: 3
   FireRange: 1.75
   _arrow: {fileID: 8057273963774230780, guid: 5ed294e4c0ed9494fb9250f54ec6952f, type: 3}
 --- !u!4 &5754476984486348826 stripped

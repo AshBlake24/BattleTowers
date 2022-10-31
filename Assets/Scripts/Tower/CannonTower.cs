@@ -46,7 +46,7 @@ public class CannonTower : AttackTower
 
         RotateToTarget();
 
-        if (LastShootTime >= FiringRate)
+        if (LastShootTime >= 1f / AttackPerSecond)
         {
             Shot();
 
@@ -54,6 +54,11 @@ public class CannonTower : AttackTower
         }
 
         LastShootTime += Time.deltaTime;
+    }
+
+    public override int GetDamage()
+    {
+        return _cannonball.Damage;
     }
 
     protected override void Shot()

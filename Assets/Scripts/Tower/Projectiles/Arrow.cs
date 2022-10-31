@@ -9,6 +9,7 @@ public class Arrow : MonoBehaviour
     private Enemy _target;
 
     public static ObjectPool<ParticleSystem> EffectPool { get; private set; }
+    public int Damage => _damage;
 
     private void OnEnable()
     {

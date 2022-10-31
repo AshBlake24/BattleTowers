@@ -9,6 +9,7 @@ public class IceTower : Tower
     private Collider[] _colliders;
 
     public static ObjectPool<ParticleSystem> EffectPool { get; private set; }
+    public float Duration => _freezingTime;
 
     private void OnEnable()
     {
@@ -25,12 +26,17 @@ public class IceTower : Tower
         if (_colliders.Length <= 0)
             return;
 
-        if (LastShootTime >= FiringRate)
+        if (LastShootTime >= 1f / AttackPerSecond)
         {
             Shot();
 
             LastShootTime = 0;
         }
+    }
+
+    public override int GetDamage()
+    {
+        return 0;
     }
 
     protected override void CheckTargets()

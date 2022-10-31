@@ -46,13 +46,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8693e6797a5cba34891d08c3b50e482c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 250
+  _name: Cannon Tower
+  _buyPrice: 250
   _sellPrice: 125
+  _towerIcon: {fileID: 21300000, guid: 8621313d8d6ad8042804a435c971442e, type: 3}
+  _info: deals damage to enemies in a small area
   EnemiesLayerMask:
     serializedVersion: 2
     m_Bits: 256
   FirePoint: {fileID: 6916859685351763760}
-  FiringRate: 1
+  AttackPerSecond: 1
   FireRange: 1.75
   _cannon: {fileID: 3336356363077795515}
   _angleInDegrees: 20

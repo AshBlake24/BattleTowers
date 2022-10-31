@@ -33,7 +33,7 @@ public class SceneLoader : MonoBehaviour
         _progressBarFiller.fillAmount = Mathf.MoveTowards(_progressBarFiller.fillAmount, _fillingTarget, _progressBarFillingSpeed * Time.deltaTime);
     }
 
-    public async void LoadScene(string sceneName, bool loadWithDelay)
+    public async void LoadScene(string sceneName, LoadingType loadingType)
     {
         ResetProgressBar();
 
@@ -48,7 +48,7 @@ public class SceneLoader : MonoBehaviour
         }
         while (loadedScene.progress < 1);
 
-        if (loadWithDelay)
+        if (loadingType == LoadingType.WithDelay)
             await Task.Delay(_delayAfterSceneLoaded);
 
         _loadingScreen.gameObject.SetActive(false);
@@ -58,10 +58,10 @@ public class SceneLoader : MonoBehaviour
         _musicController.SetTrack(_scene.name);
     }
 
-    public void ChangeScene(string nextScene, string previousScene, bool loadWithDelay)
+    public void ChangeScene(string nextScene, string previousScene, LoadingType loadingType)
     {
         UnloadScene(previousScene);
-        LoadScene(nextScene, loadWithDelay);
+        LoadScene(nextScene, loadingType);
     }
 
     private void UnloadScene(string sceneName)
@@ -80,4 +80,10 @@ public class SceneLoader : MonoBehaviour
         _fillingTarget = 0;
         _progressBarFiller.fillAmount = 0;
     }
+}
+
+public enum LoadingType
+{
+    WithDelay,
+    WithoutDelay
 }

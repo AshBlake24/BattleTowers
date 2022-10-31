@@ -5,11 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyStateMachine), typeof(Collider))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private string _name;
     [SerializeField] private int _health;
     [SerializeField] private int _reward;
     [SerializeField] private int _score;
     [SerializeField] private ParticleSystem _freezeEffect;
     [SerializeField] private EnemyType _type;
+    [SerializeField] private Sprite _enemyIcon;
+    [SerializeField, TextArea(1,4)] private string _info;
 
     private Collider _collider;
     private Coroutine _freezeEffectCoroutine;
@@ -25,9 +28,13 @@ public class Enemy : MonoBehaviour
     public bool IsAlive { get; private set; }
     public bool IsFreezing { get; private set; }
     public bool KilledByPlayer { get; private set; }
+    public string Name => _name;
+    public string Info => _info;
+    public int Health => _health;
     public int Reward => _reward;
     public int Score => _score;
     public EnemyType Type => _type;
+    public Sprite Icon => _enemyIcon;
 
     private void OnEnable()
     {

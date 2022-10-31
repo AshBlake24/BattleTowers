@@ -5,6 +5,11 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private Button _resumeButton;
 
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
+
     private void OnEnable()
     {
         Time.timeScale = 0f;
