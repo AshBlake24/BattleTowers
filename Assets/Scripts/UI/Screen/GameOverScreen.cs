@@ -1,46 +1,25 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using TMPro;
 
-[RequireComponent(typeof(CanvasGroup))]
-public class GameOverScreen : Screen
+public class GameOverScreen : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private Button _restartButton;
-    [SerializeField] private TMP_Text _score;
+    [SerializeField] private GameObject _menu;
     [SerializeField] private float _delayBeforeScreen;
+
+    private void Awake()
+    {
+        _menu.gameObject.SetActive(false);
+    }
 
     private void OnEnable()
     {
         _player.Died += OnDied;
-        _restartButton.onClick.AddListener(RestartLevel);
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        Close();
     }
 
     private void OnDisable()
     {
         _player.Died -= OnDied;
-        _restartButton.onClick.RemoveListener(RestartLevel);
-    }
-
-    protected override void Open()
-    {
-        base.Open();
-
-        _score.text = $"Score: {_player.Score}";
-    }
-
-    private void RestartLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnDied()
@@ -52,6 +31,6 @@ public class GameOverScreen : Screen
     {
         yield return Helpers.GetTime(_delayBeforeScreen);
 
-        Open();
+        _menu.gameObject.SetActive(true);
     }
 }
