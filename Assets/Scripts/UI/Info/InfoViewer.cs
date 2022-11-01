@@ -34,7 +34,14 @@ public abstract class InfoViewer : MonoBehaviour
 
     protected abstract void UpdateInfoViewer();
 
-    protected abstract void UpdateButtonsOnPage();
+    protected virtual void UpdateButtonsOnPage()
+    {
+        EnableButton(NextPageButton);
+        EnableButton(PreviousPageButton);
+
+        if (CurrentPage <= 0)
+            DisableButton(PreviousPageButton);
+    }
 
     protected void EnableButton(Button button)
     {

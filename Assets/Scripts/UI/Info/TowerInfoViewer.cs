@@ -33,21 +33,10 @@ public class TowerInfoViewer : InfoViewer
 
     protected override void UpdateButtonsOnPage()
     {
-        if (CurrentPage <= 0)
-        {
-            DisableButton(PreviousPageButton);
-            EnableButton(NextPageButton);
-        }
-        else if (CurrentPage >= _towers.Length - 1)
-        {
+        base.UpdateButtonsOnPage();
+
+        if (CurrentPage >= _towers.Length - 1)
             DisableButton(NextPageButton);
-            EnableButton(PreviousPageButton);
-        }
-        else
-        {
-            EnableButton(NextPageButton);
-            EnableButton(PreviousPageButton);
-        }
     }
 
     protected override void OnNextPageButtonClick()

@@ -8,24 +8,31 @@ public class TimeAccelerator : MonoBehaviour
     [SerializeField] private Sprite _x1SpeedSprite;
     [SerializeField] private Sprite _x2SpeedSprite;
 
-    private bool isTimeAccelerated;
+    private bool _isTimeAccelerated;
 
     private void OnEnable()
     {
-        isTimeAccelerated = false;
+        _isTimeAccelerated = false;
         CheckTimeState();
     }
 
     public void SetTime()
     {
-        isTimeAccelerated = !isTimeAccelerated;
+        _isTimeAccelerated = !_isTimeAccelerated;
+
+        CheckTimeState();
+    }
+
+    public void SetTime(bool isTimeAccelerated)
+    {
+        _isTimeAccelerated = isTimeAccelerated;
 
         CheckTimeState();
     }
 
     private void CheckTimeState()
     {
-        if (isTimeAccelerated)
+        if (_isTimeAccelerated)
             Enable();
         else
             Disable();

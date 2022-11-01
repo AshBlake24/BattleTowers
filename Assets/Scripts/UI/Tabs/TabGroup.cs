@@ -19,7 +19,8 @@ public class TabGroup : MonoBehaviour
 
     public void Unsubscribe(TabButton button)
     {
-        _buttons.Remove(button);
+        if (_buttons.Contains(button))
+            _buttons.Remove(button);
     }
 
     public void OnTabSelected(TabButton button)
@@ -31,7 +32,8 @@ public class TabGroup : MonoBehaviour
         _selectedTab.Select();
 
         ResetTabs();
-        button.ChangeSprite(_tabSelected);
+
+        _selectedTab.ChangeSprite(_tabSelected);
     }
 
     private void ResetTabs()

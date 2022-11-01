@@ -11,7 +11,12 @@ public class WaveTimer : MonoBehaviour
 
     private void OnEnable()
     {
-        _spawner.WaveStarted += OnWaveStarted;
+        _spawner.WaveStarted += OnWaveStarted;        
+    }
+
+    private void Start()
+    {
+        _timer.raycastTarget = false;
     }
 
     private void OnDisable()

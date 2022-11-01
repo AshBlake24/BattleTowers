@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ButtonsAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: a1f212178b9d59d4b8844a0c71d041c5, type: 3}
+    - {fileID: 2800000, guid: 39f015e8068daa24785315eadd4e68e3, type: 3}
+    - {fileID: 2800000, guid: 70783f222b0c71440a082ff647835516, type: 3}
+    - {fileID: 2800000, guid: faab2a7b64954475c846e64886f97afd, type: 3}
+    - {fileID: 2800000, guid: f1fe9cdb96f0d9248a97b206cc146ebf, type: 3}
+    - {fileID: 2800000, guid: e1172d0161030574dae11c5e2cb8921a, type: 3}
+    - {fileID: 2800000, guid: 41b00c3781537dd4e9d60980fc56f805, type: 3}
+    - {fileID: 2800000, guid: 560e0d8591efac84f9340ef1145d7123, type: 3}
+    - {fileID: 2800000, guid: 582eccb6699391543a596e468b56d68c, type: 3}
+    - {fileID: 2800000, guid: ec553aa9b5d98d84081542d078774b16, type: 3}
+    - {fileID: 2800000, guid: 90523fd09249fed4291cb5227e137ea0, type: 3}
+    - {fileID: 2800000, guid: 62fda660fd1eec141ac6a3a04a9771d4, type: 3}
+    - {fileID: 2800000, guid: 930d59d8747814c02ada5351be3843eb, type: 3}
+    - {fileID: 2800000, guid: fbca5aed5c95ceb4481995c3bb8246de, type: 3}
+    - {fileID: 2800000, guid: a5fe85b925818cb408804d8ed1c0511b, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 62fda660fd1eec141ac6a3a04a9771d4, type: 3}
+  - {fileID: 21300000, guid: 90523fd09249fed4291cb5227e137ea0, type: 3}
+  - {fileID: 21300000, guid: e1172d0161030574dae11c5e2cb8921a, type: 3}
+  - {fileID: 21300000, guid: 70783f222b0c71440a082ff647835516, type: 3}
+  - {fileID: 21300000, guid: 560e0d8591efac84f9340ef1145d7123, type: 3}
+  - {fileID: 21300000, guid: 582eccb6699391543a596e468b56d68c, type: 3}
+  - {fileID: 21300000, guid: a1f212178b9d59d4b8844a0c71d041c5, type: 3}
+  - {fileID: 21300000, guid: 41b00c3781537dd4e9d60980fc56f805, type: 3}
+  - {fileID: 21300000, guid: 930d59d8747814c02ada5351be3843eb, type: 3}
+  - {fileID: 21300000, guid: 39f015e8068daa24785315eadd4e68e3, type: 3}
+  - {fileID: 21300000, guid: ec553aa9b5d98d84081542d078774b16, type: 3}
+  - {fileID: 21300000, guid: a5fe85b925818cb408804d8ed1c0511b, type: 3}
+  - {fileID: 21300000, guid: faab2a7b64954475c846e64886f97afd, type: 3}
+  - {fileID: 21300000, guid: f1fe9cdb96f0d9248a97b206cc146ebf, type: 3}
+  - {fileID: 21300000, guid: fbca5aed5c95ceb4481995c3bb8246de, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - close_small_but
+  - circle_2
+  - button_round
+  - box_coin2
+  - button_triangle_left
+  - button_triangle_right
+  - blue_but_flip
+  - button_square
+  - settings_SliderHandle
+  - blue_but_pressed_flip
+  - circle_1
+  - Speed_2x
+  - button_4_Black
+  - button_login
+  - Speed_1x
+  m_RenderDataMap: {}
+  m_Tag: ButtonsAtlas
+  m_IsVariant: 0
