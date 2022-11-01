@@ -9,6 +9,12 @@ public class TabGroup : MonoBehaviour
     private List<TabButton> _buttons;
     private TabButton _selectedTab;
 
+    private void Start()
+    {
+        if (_buttons != null && _buttons.Count > 0)
+            OnTabSelected(_buttons[0]);
+    }
+
     public void Subscribe(TabButton button)
     {
         if (_buttons == null)

@@ -5,6 +5,8 @@ public class FPSCounter : MonoBehaviour
 {
     private const float Frequency = 1.0f;
 
+    [SerializeField] private bool isActive;
+
     private int _framesPerSec;
     private string _fps;
     private GUIStyle _style;
@@ -15,12 +17,13 @@ public class FPSCounter : MonoBehaviour
         _style.fontSize = 40;
         _style.normal.textColor = Color.white;
 
-        StartCoroutine(CountFPS());   
+        if (isActive)
+            StartCoroutine(CountFPS());
     }
 
     private IEnumerator CountFPS()
     {
-        for (;;)
+        while (isActive)
         {
             _framesPerSec = Time.frameCount;
             float lastTime = Time.realtimeSinceStartup;
