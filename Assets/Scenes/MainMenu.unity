@@ -1061,9 +1061,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075ce8ff9d10ab049a64bbc87a12f6e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnabledSprite: {fileID: 420471118}
+  DisabledSprite: {fileID: 108500354}
   _musicController: {fileID: 11400000, guid: 7f607aa840f1a184a85aeb396a0752d9, type: 2}
-  _enabledSprite: {fileID: 420471118}
-  _disabledSprite: {fileID: 108500354}
 --- !u!1001 &281579101
 PrefabInstance:
   m_ObjectHideFlags: 0

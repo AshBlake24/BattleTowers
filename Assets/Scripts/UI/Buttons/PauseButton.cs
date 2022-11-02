@@ -1,11 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseButton : UnityEngine.UI.Extensions.Button
+public class PauseButton : MonoBehaviour
 {
-    [SerializeField] private PauseMenu _pauseMenu;
-
-    protected override void OnButtonClick()
+    // Start is called before the first frame update
+    void Start()
     {
-        _pauseMenu.gameObject.SetActive(true);
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }

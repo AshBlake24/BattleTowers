@@ -9,23 +9,16 @@ public class StartWaveButton : MonoBehaviour
     private void OnEnable()
     {
         _button.onClick.AddListener(OnButtonClick);
-        _spawner.WaveCleared += OnWaveCleared;
     }
 
     private void OnDisable()
     {
         _button.onClick.RemoveListener(OnButtonClick);
-        _spawner.WaveCleared -= OnWaveCleared;
     }
 
     private void OnButtonClick()
     {
         _spawner.SetNextWave();
         _button.gameObject.SetActive(false);
-    }
-
-    private void OnWaveCleared()
-    {
-        _button.gameObject.SetActive(true);
     }
 }

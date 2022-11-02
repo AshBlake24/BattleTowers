@@ -42,6 +42,7 @@ public class Spawner : MonoBehaviour
         {
             _killedEnemies = 0;
             WaveCleared?.Invoke();
+            SetNextWave();
         }
     }
 
