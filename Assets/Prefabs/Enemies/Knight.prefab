@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Knight
-  _health: 160
+  _health: 185
   _reward: 30
   _score: 120
   _freezeEffect: {fileID: 7572306748357295866, guid: a1228cdd9316232478a1f11d02fdad19, type: 3}

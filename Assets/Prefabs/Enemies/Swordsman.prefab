@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Swordsman
-  _health: 75
+  _health: 110
   _reward: 10
   _score: 60
   _freezeEffect: {fileID: 7572306748357295866, guid: a1228cdd9316232478a1f11d02fdad19, type: 3}

@@ -140,7 +140,7 @@ public class Spawner : MonoBehaviour
         [Header("Wave Settings")]
         [SerializeField] private Enemy[] _enemies;
         [SerializeField] private int _startEnemiesCount;
-        [SerializeField] private int _enemiesWaveMultiplier;
+        [SerializeField] private float _enemiesWaveMultiplier;
 
         [Header("Spawn Rate Settings")]
         [SerializeField] private float[] _spawnRates;
@@ -151,12 +151,12 @@ public class Spawner : MonoBehaviour
 
         public void SetDifficulty(int waveNumber)
         {
-            EnemiesCount += waveNumber * _enemiesWaveMultiplier;
+            EnemiesCount += Convert.ToInt32(waveNumber * _enemiesWaveMultiplier);
         }
 
         public void ResetToDefault()
         {
-            EnemiesCount = _startEnemiesCount - _enemiesWaveMultiplier;
+            EnemiesCount = _startEnemiesCount - (int)_enemiesWaveMultiplier;
         }
 
         public float GetSpawnRate()
